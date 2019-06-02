@@ -50,9 +50,9 @@ public class ShiroConfig {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         //游客，开发权限
         filterChainDefinitionMap.put("/front/**", "anon");
-        //用户，需要角色权限 “user”
+        //用户，需要角色权限 "user"
         filterChainDefinitionMap.put("/user/**", "user");
-        //管理员，需要角色权限 “admin”
+        //管理员，需要角色权限 "admin"
 //        filterChainDefinitionMap.put("/admin/**", "admin");
         //开放登陆接口
         filterChainDefinitionMap.put("/login", "anon");
@@ -69,8 +69,12 @@ public class ShiroConfig {
         return shiroFilterFactoryBean;
     }
 
+
     /**
      * 注入 securityManager
+     *
+     * @param customRealm
+     * @return
      */
     @Bean(name = "securityManager")
     public DefaultWebSecurityManager securityManager(@Qualifier("customRealm") CustomRealm customRealm) {
