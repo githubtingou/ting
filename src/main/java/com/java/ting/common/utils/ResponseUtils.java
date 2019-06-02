@@ -9,6 +9,7 @@ import com.java.ting.common.ResponseVo;
  * @author tingOu
  */
 public class ResponseUtils {
+
     /**
      * ResponseVo全量参数
      *
@@ -19,7 +20,7 @@ public class ResponseUtils {
      * @param <T>
      * @return
      */
-    public <T> ResponseVo<T> buildResponseVo(Integer code, String message, Boolean success, T data) {
+    public static <T> ResponseVo<T> buildResponseVo(Integer code, String message, Boolean success, T data) {
         ResponseVo<T> responseVo = new ResponseVo<T>();
         responseVo.setCode(code);
         responseVo.setMessage(message);
@@ -36,7 +37,7 @@ public class ResponseUtils {
      * @param <T>
      * @return
      */
-    public <T> ResponseVo<T> buildResponseCodeData(ResponseCode responseCode, T data) {
+    public static <T> ResponseVo<T> buildResponseCode(ResponseCode responseCode, T data) {
         ResponseVo<T> responseVo = new ResponseVo<T>();
         responseVo.setCode(responseCode.getCode());
         responseVo.setMessage(responseCode.getMessage());
@@ -51,7 +52,7 @@ public class ResponseUtils {
      * @param responseCode
      * @return
      */
-    public ResponseVo buildResponseCode(ResponseCode responseCode) {
+    public static ResponseVo buildResponseCode(ResponseCode responseCode) {
         ResponseVo responseVo = new ResponseVo();
         responseVo.setCode(responseCode.getCode());
         responseVo.setMessage(responseCode.getMessage());

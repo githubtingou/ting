@@ -4,9 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 公共返回
- * @author tingOu
+ * 公共返回类
+ *
  * @param <T>
+ * @author tingOu
  */
 @Setter
 @Getter

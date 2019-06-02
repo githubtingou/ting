@@ -1,7 +1,5 @@
 package com.java.ting.common;
 
-import com.sun.org.apache.bcel.internal.classfile.Code;
-
 /**
  * 响应码
  *
@@ -15,7 +13,19 @@ public enum ResponseCode {
     /**
      * 失败
      */
-    ERROE_CODE(5000, "请求成功", false),
+    ERROE_CODE(5000, "请求失败", false),
+    /**
+     * 文件上传失败
+     */
+    ERROR_FILE(5001, "文件上传失败"),
+    /**
+     * 文件不能为空
+     */
+    ERROR_FILE_NULL(5002, "文件不能为空", false),
+    /**
+     * 数据插入失败
+     */
+    ERROR_INSERT(5003, "数据插入失败"),
     /**
      * 权限错误
      */
@@ -25,7 +35,9 @@ public enum ResponseCode {
     private String message;
     private Boolean success;
 
-    ResponseCode() {
+    ResponseCode(Integer code, String message) {
+        this.code = code;
+        this.message = message;
 
     }
 

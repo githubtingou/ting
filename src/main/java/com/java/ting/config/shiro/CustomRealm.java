@@ -39,13 +39,15 @@ public class CustomRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        log.info("身份认证方法");
+        log.info("身份认证");
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         // 从数据库获取对应用户名密码的用户
         String password = "123456";
         if (null == password) {
+            log.error("用户名不正确");
             throw new AccountException("用户名不正确");
         } else if (!password.equals(new String((char[]) token.getCredentials()))) {
+            log.error("密码不正确");
             throw new AccountException("密码不正确");
         }
         return new SimpleAuthenticationInfo(token.getPrincipal(), password, getName());
@@ -59,7 +61,7 @@ public class CustomRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        System.out.println("————权限认证————");
+        log.info("权限认证");
         String username = (String) SecurityUtils.getSubject().getPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         //获得该用户角色
