@@ -3,14 +3,19 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <th:block th:replace ="common/head::commonHeader('登录页面')"></th:block>
+    <th:block th:replace="common/head::commonHeader('登录页面')"></th:block>
+    <script>
+        /*<![CDATA[*/
+
+        /*]]>*/
+    </script>
 </head>
 <body>
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-offset-4 col-md-5 column">
             <!-- 项目名 -->
-            <div class="text-center"><h1 class="text-primary">TingOu</h1></div>
+            <div class="text-center"><h1 class="text-primary">Ting</h1></div>
             <!--spring security 错误提示-->
             <!--            <th:block th:if="${param.error}">-->
             <!--                <div class="alert alert-warning alert-dismissable">-->
@@ -31,7 +36,7 @@
             <!--                    您已注销成功！-->
             <!--                </div>-->
             <!--            </th:block>-->
-            <form role="form" th:action="@{/toLogin}" method="POST" id="inputForm"
+            <form role="form" th:action="@{/toLogin}" method="post" id="inputForm"
                   class="form-horizontal bs-example bs-example-form">
                 <div class="input-group">
                     <div class="input-group-addon"><span class="glyphicon glyphicon-user" title="用户名"></span></div>
