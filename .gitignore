@@ -16,9 +16,11 @@ HELP.md
 *.iws
 *.iml
 *.ipr
+logs
 .mvn
 mvnw
 mvnw.cmd
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/

@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.ting.mapper.SysRoleMapper">
+
+	<!--实体映射-->
+	<resultMap id="BaseResultMap" type="com.java.ting.domain.SysRole">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="englishName" column="english_name" />
+		<result property="roleType" column="role_type" />
+		<result property="isEnable" column="is_enable" />
+		<result property="addTime" column="add_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="addUser" column="add_user" />
+		<result property="updateUser" column="update_user" />
+		<result property="delFlag" column="del_flag" />
+	</resultMap>
+
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		 id,	name,	english_name,	role_type,	is_enable,	add_time,	update_time,	add_user,	update_user,	del_flag
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM sys_role
+		 WHERE id = #{id}
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="getByPage" resultMap="BaseResultMap" resultType="com.java.ting.domain.SysRole">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM sys_role where del_flag =0 
+		 <if test=" sysRole != null">
+			<if test="sysRole.id != null">
+			   and id = #{sysRole.id}
+			</if>
+			<if test="sysRole.name != null">
+			   and name = #{sysRole.name}
+			</if>
+			<if test="sysRole.englishName != null">
+			   and english_name = #{sysRole.englishName}
+			</if>
+			<if test="sysRole.roleType != null">
+			   and role_type = #{sysRole.roleType}
+			</if>
+			<if test="sysRole.isEnable != null">
+			   and is_enable = #{sysRole.isEnable}
+			</if>
+			<if test="sysRole.addTime != null">
+			   and add_time = #{sysRole.addTime}
+			</if>
+			<if test="sysRole.updateTime != null">
+			   and update_time = #{sysRole.updateTime}
+			</if>
+			<if test="sysRole.addUser != null">
+			   and add_user = #{sysRole.addUser}
+			</if>
+			<if test="sysRole.updateUser != null">
+			   and update_user = #{sysRole.updateUser}
+			</if>
+			<if test="sysRole.delFlag != null">
+			   and del_flag = #{sysRole.delFlag}
+			</if>
+		 </if>
+		 <if test="orderColumn != null">
+			 order by ${orderColumn} 
+		 </if>
+		 <if test="orderType != null">
+			 ${orderType} 
+		 </if>
+		 <if test="start != null and limit != null">
+			 limit #{start}, #{limit}
+		 </if>
+	</select>
+
+	<!-- 简单查询 -->
+	<select id="getListByCondition" resultMap="BaseResultMap" resultType="com.java.ting.domain.SysRole">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM sys_role where del_flag = 0 
+		 <if test=" sysRole != null">
+			<if test="sysRole.id != null">
+			   and id = #{sysRole.id}
+			</if>
+			<if test="sysRole.name != null">
+			   and name = #{sysRole.name}
+			</if>
+			<if test="sysRole.englishName != null">
+			   and english_name = #{sysRole.englishName}
+			</if>
+			<if test="sysRole.roleType != null">
+			   and role_type = #{sysRole.roleType}
+			</if>
+			<if test="sysRole.isEnable != null">
+			   and is_enable = #{sysRole.isEnable}
+			</if>
+			<if test="sysRole.addTime != null">
+			   and add_time = #{sysRole.addTime}
+			</if>
+			<if test="sysRole.updateTime != null">
+			   and update_time = #{sysRole.updateTime}
+			</if>
+			<if test="sysRole.addUser != null">
+			   and add_user = #{sysRole.addUser}
+			</if>
+			<if test="sysRole.updateUser != null">
+			   and update_user = #{sysRole.updateUser}
+			</if>
+			<if test="sysRole.delFlag != null">
+			   and del_flag = #{sysRole.delFlag}
+			</if>
+		 </if>
+	</select>
+
+	<!-- 单条查询 -->
+	<select id="getOneByCondition" resultMap="BaseResultMap" resultType="com.java.ting.domain.SysRole">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM sys_role where del_flag = 0 
+		 <if test=" sysRole != null">
+			<if test="sysRole.id != null">
+			   and id = #{sysRole.id}
+			</if>
+			<if test="sysRole.name != null">
+			   and name = #{sysRole.name}
+			</if>
+			<if test="sysRole.englishName != null">
+			   and english_name = #{sysRole.englishName}
+			</if>
+			<if test="sysRole.roleType != null">
+			   and role_type = #{sysRole.roleType}
+			</if>
+			<if test="sysRole.isEnable != null">
+			   and is_enable = #{sysRole.isEnable}
+			</if>
+			<if test="sysRole.addTime != null">
+			   and add_time = #{sysRole.addTime}
+			</if>
+			<if test="sysRole.updateTime != null">
+			   and update_time = #{sysRole.updateTime}
+			</if>
+			<if test="sysRole.addUser != null">
+			   and add_user = #{sysRole.addUser}
+			</if>
+			<if test="sysRole.updateUser != null">
+			   and update_user = #{sysRole.updateUser}
+			</if>
+			<if test="sysRole.delFlag != null">
+			   and del_flag = #{sysRole.delFlag}
+			</if>
+		 </if>
+	</select>
+
+	<!-- 数量查询 -->
+	<select id="getCountByCondition" resultType="java.lang.Integer">
+		 SELECT
+		 count(id) 
+		 FROM sys_role where del_flag = 0 
+		 <if test=" sysRole != null">
+			<if test="sysRole.id != null">
+			   and id = #{sysRole.id}
+			</if>
+			<if test="sysRole.name != null">
+			   and name = #{sysRole.name}
+			</if>
+			<if test="sysRole.englishName != null">
+			   and english_name = #{sysRole.englishName}
+			</if>
+			<if test="sysRole.roleType != null">
+			   and role_type = #{sysRole.roleType}
+			</if>
+			<if test="sysRole.isEnable != null">
+			   and is_enable = #{sysRole.isEnable}
+			</if>
+			<if test="sysRole.addTime != null">
+			   and add_time = #{sysRole.addTime}
+			</if>
+			<if test="sysRole.updateTime != null">
+			   and update_time = #{sysRole.updateTime}
+			</if>
+			<if test="sysRole.addUser != null">
+			   and add_user = #{sysRole.addUser}
+			</if>
+			<if test="sysRole.updateUser != null">
+			   and update_user = #{sysRole.updateUser}
+			</if>
+			<if test="sysRole.delFlag != null">
+			   and del_flag = #{sysRole.delFlag}
+			</if>
+		 </if>
+	</select>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.java.ting.domain.SysRole">
+		 INSERT INTO sys_role
+ 		(id,name,english_name,role_type,is_enable,add_time,update_time,add_user,update_user,del_flag) 
+		 VALUES 
+ 		(#{id},#{name},#{englishName},#{roleType},#{isEnable},now(),#{updateTime},#{addUser},#{updateUser},#{delFlag}) 
+	</insert>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="com.java.ting.domain.SysRole">
+		 INSERT INTO sys_role
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null">
+				 id,
+			</if>
+			<if test="name != null">
+				 name,
+			</if>
+			<if test="englishName != null">
+				 english_name,
+			</if>
+			<if test="roleType != null">
+				 role_type,
+			</if>
+			<if test="isEnable != null">
+				 is_enable,
+			</if>
+				 add_time,
+			<if test="updateTime != null">
+				 update_time,
+			</if>
+			<if test="addUser != null">
+				 add_user,
+			</if>
+			<if test="updateUser != null">
+				 update_user,
+			</if>
+			<if test="delFlag != null">
+				 del_flag,
+			</if>
+
+		 </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id!=null">
+				 #{id},
+			</if>
+			<if test="name!=null">
+				 #{name},
+			</if>
+			<if test="englishName!=null">
+				 #{englishName},
+			</if>
+			<if test="roleType!=null">
+				 #{roleType},
+			</if>
+			<if test="isEnable!=null">
+				 #{isEnable},
+			</if>
+				 now(),
+			<if test="updateTime!=null">
+				 #{updateTime},
+			</if>
+			<if test="addUser!=null">
+				 #{addUser},
+			</if>
+			<if test="updateUser!=null">
+				 #{updateUser},
+			</if>
+			<if test="delFlag!=null">
+				 #{delFlag},
+			</if>
+		 </trim>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.java.ting.domain.SysRole">
+		 UPDATE sys_role
+ 		 <set> 
+			<if test="name != null">
+				 name = #{name},
+			</if>
+			<if test="englishName != null">
+				 english_name = #{englishName},
+			</if>
+			<if test="roleType != null">
+				 role_type = #{roleType},
+			</if>
+			<if test="isEnable != null">
+				 is_enable = #{isEnable},
+			</if>
+			<if test="addTime != null">
+				 add_time = #{addTime},
+			</if>
+			<if test="updateTime != null">
+				 update_time = #{updateTime},
+			</if>
+			<if test="addUser != null">
+				 add_user = #{addUser},
+			</if>
+			<if test="updateUser != null">
+				 update_user = #{updateUser},
+			</if>
+			<if test="delFlag != null">
+				 del_flag = #{delFlag},
+			</if>
+
+ 		 </set>
+		 WHERE id = #{id}
+	</update>
+
+</mapper>

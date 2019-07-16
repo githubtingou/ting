@@ -29,7 +29,25 @@ public enum ResponseCode {
     /**
      * 权限错误
      */
-    SHIRO_ERROR_CODE(5100, "权限错误", false);
+    SHIRO_ERROR_CODE(5100, "权限错误", false),
+    /**
+     * token错误
+     */
+    SHIRO_ERROR_TOKEN(5101, "token错误", false),
+    /**
+     * 用户无权限
+     */
+    SHIRO_ERROR_NOSHIRO(5102, "用户无权限", false),
+    /**
+     * 用户名或密码不能为空
+     */
+    SHIRO_ERROR_NOUSER(5103, "用户名或密码不能为空", false),
+
+    /**
+     * 其他权限错误
+     */
+    SHIRO_ERROR_OTHER(5199, null, false);
+
 
     private Integer code;
     private String message;

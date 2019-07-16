@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.ting.mapper.SysLogMapper">
+
+	<!--实体映射-->
+	<resultMap id="BaseResultMap" type="com.java.ting.domain.SysLog">
+		<id property="id" column="id" />
+		<result property="url" column="url" />
+		<result property="method" column="method" />
+		<result property="reqIP" column="req_IP" />
+		<result property="classMethod" column="class_method" />
+		<result property="resData" column="res_data" />
+		<result property="resultData" column="result_data" />
+		<result property="time" column="time" />
+		<result property="addTime" column="add_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="delFlag" column="del_flag" />
+	</resultMap>
+
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		 id,	url,	method,	req_IP,	class_method,	res_data,	result_data,	time,	add_time,	update_time,	del_flag
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM sys_log
+		 WHERE id = #{id}
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="getByPage" resultMap="BaseResultMap" resultType="com.java.ting.domain.SysLog">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM sys_log where del_flag =0 
+		 <if test=" sysLog != null">
+			<if test="sysLog.id != null">
+			   and id = #{sysLog.id}
+			</if>
+			<if test="sysLog.url != null">
+			   and url = #{sysLog.url}
+			</if>
+			<if test="sysLog.method != null">
+			   and method = #{sysLog.method}
+			</if>
+			<if test="sysLog.reqIP != null">
+			   and req_IP = #{sysLog.reqIP}
+			</if>
+			<if test="sysLog.classMethod != null">
+			   and class_method = #{sysLog.classMethod}
+			</if>
+			<if test="sysLog.resData != null">
+			   and res_data = #{sysLog.resData}
+			</if>
+			<if test="sysLog.resultData != null">
+			   and result_data = #{sysLog.resultData}
+			</if>
+			<if test="sysLog.time != null">
+			   and time = #{sysLog.time}
+			</if>
+			<if test="sysLog.addTime != null">
+			   and add_time = #{sysLog.addTime}
+			</if>
+			<if test="sysLog.updateTime != null">
+			   and update_time = #{sysLog.updateTime}
+			</if>
+			<if test="sysLog.delFlag != null">
+			   and del_flag = #{sysLog.delFlag}
+			</if>
+		 </if>
+		 <if test="orderColumn != null">
+			 order by ${orderColumn} 
+		 </if>
+		 <if test="orderType != null">
+			 ${orderType} 
+		 </if>
+		 <if test="start != null and limit != null">
+			 limit #{start}, #{limit}
+		 </if>
+	</select>
+
+	<!-- 简单查询 -->
+	<select id="getListByCondition" resultMap="BaseResultMap" resultType="com.java.ting.domain.SysLog">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM sys_log where del_flag = 0 
+		 <if test=" sysLog != null">
+			<if test="sysLog.id != null">
+			   and id = #{sysLog.id}
+			</if>
+			<if test="sysLog.url != null">
+			   and url = #{sysLog.url}
+			</if>
+			<if test="sysLog.method != null">
+			   and method = #{sysLog.method}
+			</if>
+			<if test="sysLog.reqIP != null">
+			   and req_IP = #{sysLog.reqIP}
+			</if>
+			<if test="sysLog.classMethod != null">
+			   and class_method = #{sysLog.classMethod}
+			</if>
+			<if test="sysLog.resData != null">
+			   and res_data = #{sysLog.resData}
+			</if>
+			<if test="sysLog.resultData != null">
+			   and result_data = #{sysLog.resultData}
+			</if>
+			<if test="sysLog.time != null">
+			   and time = #{sysLog.time}
+			</if>
+			<if test="sysLog.addTime != null">
+			   and add_time = #{sysLog.addTime}
+			</if>
+			<if test="sysLog.updateTime != null">
+			   and update_time = #{sysLog.updateTime}
+			</if>
+			<if test="sysLog.delFlag != null">
+			   and del_flag = #{sysLog.delFlag}
+			</if>
+		 </if>
+	</select>
+
+	<!-- 单条查询 -->
+	<select id="getOneByCondition" resultMap="BaseResultMap" resultType="com.java.ting.domain.SysLog">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM sys_log where del_flag = 0 
+		 <if test=" sysLog != null">
+			<if test="sysLog.id != null">
+			   and id = #{sysLog.id}
+			</if>
+			<if test="sysLog.url != null">
+			   and url = #{sysLog.url}
+			</if>
+			<if test="sysLog.method != null">
+			   and method = #{sysLog.method}
+			</if>
+			<if test="sysLog.reqIP != null">
+			   and req_IP = #{sysLog.reqIP}
+			</if>
+			<if test="sysLog.classMethod != null">
+			   and class_method = #{sysLog.classMethod}
+			</if>
+			<if test="sysLog.resData != null">
+			   and res_data = #{sysLog.resData}
+			</if>
+			<if test="sysLog.resultData != null">
+			   and result_data = #{sysLog.resultData}
+			</if>
+			<if test="sysLog.time != null">
+			   and time = #{sysLog.time}
+			</if>
+			<if test="sysLog.addTime != null">
+			   and add_time = #{sysLog.addTime}
+			</if>
+			<if test="sysLog.updateTime != null">
+			   and update_time = #{sysLog.updateTime}
+			</if>
+			<if test="sysLog.delFlag != null">
+			   and del_flag = #{sysLog.delFlag}
+			</if>
+		 </if>
+	</select>
+
+	<!-- 数量查询 -->
+	<select id="getCountByCondition" resultType="java.lang.Integer">
+		 SELECT
+		 count(id) 
+		 FROM sys_log where del_flag = 0 
+		 <if test=" sysLog != null">
+			<if test="sysLog.id != null">
+			   and id = #{sysLog.id}
+			</if>
+			<if test="sysLog.url != null">
+			   and url = #{sysLog.url}
+			</if>
+			<if test="sysLog.method != null">
+			   and method = #{sysLog.method}
+			</if>
+			<if test="sysLog.reqIP != null">
+			   and req_IP = #{sysLog.reqIP}
+			</if>
+			<if test="sysLog.classMethod != null">
+			   and class_method = #{sysLog.classMethod}
+			</if>
+			<if test="sysLog.resData != null">
+			   and res_data = #{sysLog.resData}
+			</if>
+			<if test="sysLog.resultData != null">
+			   and result_data = #{sysLog.resultData}
+			</if>
+			<if test="sysLog.time != null">
+			   and time = #{sysLog.time}
+			</if>
+			<if test="sysLog.addTime != null">
+			   and add_time = #{sysLog.addTime}
+			</if>
+			<if test="sysLog.updateTime != null">
+			   and update_time = #{sysLog.updateTime}
+			</if>
+			<if test="sysLog.delFlag != null">
+			   and del_flag = #{sysLog.delFlag}
+			</if>
+		 </if>
+	</select>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.java.ting.domain.SysLog">
+		 INSERT INTO sys_log
+ 		(id,url,method,req_IP,class_method,res_data,result_data,time,add_time,update_time,del_flag) 
+		 VALUES 
+ 		(#{id},#{url},#{method},#{reqIP},#{classMethod},#{resData},#{resultData},#{time},now(),#{updateTime},#{delFlag}) 
+	</insert>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="com.java.ting.domain.SysLog">
+		 INSERT INTO sys_log
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null">
+				 id,
+			</if>
+			<if test="url != null">
+				 url,
+			</if>
+			<if test="method != null">
+				 method,
+			</if>
+			<if test="reqIP != null">
+				 req_IP,
+			</if>
+			<if test="classMethod != null">
+				 class_method,
+			</if>
+			<if test="resData != null">
+				 res_data,
+			</if>
+			<if test="resultData != null">
+				 result_data,
+			</if>
+			<if test="time != null">
+				 time,
+			</if>
+				 add_time,
+			<if test="updateTime != null">
+				 update_time,
+			</if>
+			<if test="delFlag != null">
+				 del_flag,
+			</if>
+
+		 </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id!=null">
+				 #{id},
+			</if>
+			<if test="url!=null">
+				 #{url},
+			</if>
+			<if test="method!=null">
+				 #{method},
+			</if>
+			<if test="reqIP!=null">
+				 #{reqIP},
+			</if>
+			<if test="classMethod!=null">
+				 #{classMethod},
+			</if>
+			<if test="resData!=null">
+				 #{resData},
+			</if>
+			<if test="resultData!=null">
+				 #{resultData},
+			</if>
+			<if test="time!=null">
+				 #{time},
+			</if>
+				 now(),
+			<if test="updateTime!=null">
+				 #{updateTime},
+			</if>
+			<if test="delFlag!=null">
+				 #{delFlag},
+			</if>
+		 </trim>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.java.ting.domain.SysLog">
+		 UPDATE sys_log
+ 		 <set> 
+			<if test="url != null">
+				 url = #{url},
+			</if>
+			<if test="method != null">
+				 method = #{method},
+			</if>
+			<if test="reqIP != null">
+				 req_IP = #{reqIP},
+			</if>
+			<if test="classMethod != null">
+				 class_method = #{classMethod},
+			</if>
+			<if test="resData != null">
+				 res_data = #{resData},
+			</if>
+			<if test="resultData != null">
+				 result_data = #{resultData},
+			</if>
+			<if test="time != null">
+				 time = #{time},
+			</if>
+			<if test="addTime != null">
+				 add_time = #{addTime},
+			</if>
+			<if test="updateTime != null">
+				 update_time = #{updateTime},
+			</if>
+			<if test="delFlag != null">
+				 del_flag = #{delFlag},
+			</if>
+
+ 		 </set>
+		 WHERE id = #{id}
+	</update>
+
+</mapper>

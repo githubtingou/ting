@@ -1,7 +1,7 @@
 package com.java.ting.common.utils;
 
-import com.java.ting.dao.UserDao;
-import com.java.ting.entity.User;
+import com.java.ting.domain.AdminUser;
+import com.java.ting.mapper.AdminUserMapper;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class LoginUtils {
 
     @Autowired
-    private UserDao userDao;
+    private AdminUserMapper adminUserMapper;
 
     /**
      * 获取登录用户的用户名
@@ -25,14 +25,16 @@ public class LoginUtils {
     }
 
     /**
-     * 获取当前登录的用户名
+     * 获取当前登录的用户信息
      *
      * @return
      */
-    public User getLoginUser() {
+    public AdminUser getLoginUser() {
         String username = getUserName();
-        User user = userDao.getUser(username);
-        return user;
+        AdminUser adminUser = new AdminUser();
+        adminUser.setLoginName(username);
+        adminUser = adminUserMapper.getOneByCondition(adminUser);
+        return adminUser;
     }
 
 }

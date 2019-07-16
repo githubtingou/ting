@@ -2,7 +2,7 @@ package com.java.ting.config.aspect;
 
 
 import com.google.gson.Gson;
-import com.java.ting.entity.SysLog;
+import com.java.ting.domain.SysLog;
 import com.java.ting.service.SysLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -72,7 +72,7 @@ public class LogAspect {
             log.info("CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
             sysLog.setClassMethod(joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
             log.info("ARGS : " + Arrays.toString(joinPoint.getArgs()));
-            sysLog.setReqData(Arrays.toString(joinPoint.getArgs()));
+            sysLog.setResData(Arrays.toString(joinPoint.getArgs()));
             sysLog.setTime(time);
             sysLog.setResultData(joinPoint.proceed().toString());
             sysLogService.insertSysLog(sysLog);

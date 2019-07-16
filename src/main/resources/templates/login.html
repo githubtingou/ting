@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <th:block th:replace="common/head::commonHeader('登录页面')"></th:block>
+    <th:block th:replace="common/head :: commonCss('登录页面')"></th:block>
+    <th:block th:replace="common/head  :: commonJs"></th:block>
     <script>
         /*<![CDATA[*/
 
@@ -17,30 +17,30 @@
             <!-- 项目名 -->
             <div class="text-center"><h1 class="text-primary">Ting</h1></div>
             <!--spring security 错误提示-->
-            <!--            <th:block th:if="${param.error}">-->
-            <!--                <div class="alert alert-warning alert-dismissable">-->
-            <!--                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">-->
-            <!--                    </button>-->
-            <!--                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"> &times;-->
-            <!--                    </button>-->
-            <!--                    <span th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></span>-->
-            <!--                </div>-->
+            <th:block th:if="${success!= null && success == false}">
+                <div class="alert alert-warning alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                    </button>
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"> &times;
+                    </button>
+                    <span th:text="${message}"></span>
+                </div>
 
-            <!--            </th:block>-->
+            </th:block>
 
-            <!--            <th:block th:if="${param.logout}">-->
-            <!--                <div class="alert alert- alert-dismissable">-->
-            <!--                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">-->
-            <!--                        &times;-->
-            <!--                    </button>-->
-            <!--                    您已注销成功！-->
-            <!--                </div>-->
-            <!--            </th:block>-->
+            <th:block th:if="${param.logout}">
+                <div class="alert alert- alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                        &times;
+                    </button>
+                    您已注销成功！
+                </div>
+            </th:block>
             <form role="form" th:action="@{/toLogin}" method="post" id="inputForm"
                   class="form-horizontal bs-example bs-example-form">
                 <div class="input-group">
                     <div class="input-group-addon"><span class="glyphicon glyphicon-user" title="用户名"></span></div>
-                    <input type="text" name="username" placeholder="请输入用户名"
+                    <input type="text" name="loginName" placeholder="请输入用户名"
                            class="form-control required" id="username"/>
                 </div>
                 <br/>
