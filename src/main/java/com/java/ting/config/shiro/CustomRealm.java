@@ -12,6 +12,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 
 import java.util.HashSet;
 import java.util.List;
@@ -24,7 +25,6 @@ import java.util.Set;
  */
 @Slf4j
 public class CustomRealm extends AuthorizingRealm {
-
 
     @Autowired
     private AdminUserMapper userMapper;
@@ -44,24 +44,24 @@ public class CustomRealm extends AuthorizingRealm {
         log.info("身份认证");
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         String loginUserName = token.getUsername();
-        String password = "" ;
+        String password = "";
         if (token.getPassword() != null) {
             password = new String(token.getPassword());
         }
-        AdminUser user = null;
+        AdminUser user = new AdminUser();
         // 从数据库获取对应用户名密码的用户
         user.setLoginName(loginUserName);
         user.setPassword(password);
-        if (null == password) {
+        user = userMapper.getOneByCondition(user);
+        if (StringUtils.isEmpty(password)) {
             log.error("用户名不正确");
             throw new AccountException("用户名不正确");
         } else if (!password.equals(token.getPassword())) {
             log.error("密码不正确");
             throw new AccountException("密码不正确");
         }
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, password, getName());
 
-        return info;
+        return new SimpleAuthenticationInfo(user, password, getName());
     }
 
     /**

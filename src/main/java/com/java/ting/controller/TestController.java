@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-    @RequestMapping("/front/test")
+    @RequestMapping("front/test")
     public ResponseVo test() {
         System.out.println("111111111111111111111111");
         return ResponseUtils.buildResponseCode(ResponseCode.SUCCESS_CODE);

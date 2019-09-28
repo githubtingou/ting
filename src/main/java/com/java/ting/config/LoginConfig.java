@@ -1,5 +1,6 @@
 package com.java.ting.config;
 
+import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 import com.java.ting.common.ResponseCode;
 import com.java.ting.common.ResponseVo;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
+
 
 /**
  * login
@@ -28,8 +31,6 @@ public class LoginConfig {
 
     @Autowired
     private AdminUserMapper adminUserMapper;
-
-    Gson gson = new Gson();
 
     @RequestMapping(value = {"/login"})
     public String login() {
@@ -55,7 +56,7 @@ public class LoginConfig {
      */
     @RequestMapping(value = "/toLogin")
     public ModelAndView loginPage(AdminUser user) {
-        log.info("用户登录;user:{}", gson.toJson(user));
+        log.info("用户登录;user:{}", JSON.toJSON(user));
         ModelAndView modelAndView = new ModelAndView();
         //   AdminUser loginUser = adminUserMapper.getOneByCondition(user);
 //        if (StringUtils.isEmpty(user.getLoginName()) || StringUtils.isEmpty(user.getPassword())) {
