@@ -4,8 +4,27 @@
     <meta charset="UTF-8">
     <th:block th:replace="common/head :: commonCss('登录页面')"></th:block>
     <th:block th:replace="common/head  :: commonJs"></th:block>
-    <script>
+    <script  type="text/javascript">
         /*<![CDATA[*/
+        $(document).ready(function () {
+                $("#inputForm").validate({
+                    submitHandler: function (form) {
+                        layer.load(2, {shade: [0.1, '#fff']});
+                        form.submit();
+                    },
+                    errorContainer: "#messageBox",
+                    errorPlacement: function (error, element) {
+                        // $("#messageBox").text("输入有误，请先更正。");
+                        if (element.is(":checkbox") || element.is(":radio") || element.parent().is(".input-append")) {
+                            // error.appendTo(element.parent().parent());
+                            layer.tips(error[0].innerText, element.parent().parent(), {tipsMore: true});
+                        } else {
+                            // error.insertAfter(element);
+                            layer.tips(error[0].innerText, element, {tipsMore: true});
+                        }
+                    }
+                });
+            })
 
         /*]]>*/
     </script>

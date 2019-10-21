@@ -1,4 +1,7 @@
-<th:block th:fragment="commonCss(title)">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="commonCss(title)">
+
     <title th:text="${title}"></title>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta http-equiv="Expires" content="0">
@@ -18,7 +21,7 @@
     <!--        <link th:href="@{/dev/jquery-plugins/ionicons.min.css}" rel="stylesheet"/>-->
     <link th:href="@{/dev/font-awesome/css/font-awesome.min.css}" rel="stylesheet"/>
 
-</th:block>
+</head>
 
 <th:block th:fragment="commonJs">
     <script th:src="@{/dev/jQuery/jquery-1.12.4.js}" type="text/javascript"></script>
@@ -42,9 +45,9 @@
     <!--拖动-->
     <script th:src="@{/dev/jQuery/jquery-ui-draggable-1.12.1.min.js}" type="text/javascript"></script>
     <!--validation-->
-    <script th:src="@{/dev/jquery-validation-1.19.0/dist/jquery.validate.min.js}" type="text/javascript"></script>
+    <script th:src="@{/dev/jquery-validation-1.19.1/dist/jquery.validate.min.js}" type="text/javascript"></script>
     <!--validation 中文-->
-    <script th:src="@{/dev/jquery-validation-1.19.0/dist/localization/messages_zh.min.js}"
+    <script th:src="@{/dev/jquery-validation-1.19.1/dist/localization/messages_zh.min.js}"
             type="text/javascript"></script>
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -60,3 +63,4 @@
     <script th:src="@{/dev/EChart/echarts.js}" type="text/javascript"></script>
     <script th:src="@{/dev/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}" type="text/javascript"></script>
 </th:block>
+</html>

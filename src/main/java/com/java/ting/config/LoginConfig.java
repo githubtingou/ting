@@ -1,7 +1,6 @@
 package com.java.ting.config;
 
 import com.alibaba.fastjson.JSON;
-import com.google.gson.Gson;
 import com.java.ting.common.ResponseCode;
 import com.java.ting.common.ResponseVo;
 import com.java.ting.common.utils.ResponseUtils;
@@ -13,11 +12,10 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.annotation.Resource;
 
 
 /**
@@ -32,7 +30,7 @@ public class LoginConfig {
     @Autowired
     private AdminUserMapper adminUserMapper;
 
-    @RequestMapping(value = {"/login"})
+    @RequestMapping(value = {"/login",""})
     public String login() {
         log.info("跳转到登录页面");
         return "login";
@@ -58,29 +56,29 @@ public class LoginConfig {
     public ModelAndView loginPage(AdminUser user) {
         log.info("用户登录;user:{}", JSON.toJSON(user));
         ModelAndView modelAndView = new ModelAndView();
-        //   AdminUser loginUser = adminUserMapper.getOneByCondition(user);
-//        if (StringUtils.isEmpty(user.getLoginName()) || StringUtils.isEmpty(user.getPassword())) {
-//            log.info("用户名或密码不能为空");
-//            modelAndView.addObject(ResponseUtils.buildResponseCode(ResponseCode.SHIRO_ERROR_CODE));
-//            modelAndView.setViewName("/login");
-//        }
-//        if (loginUser == null) {
-//            modelAndView.addObject(ResponseUtils.buildResponseCode(ResponseCode.SHIRO_ERROR_CODE));
-//            modelAndView.setViewName("/login");
-//        } else {
-        // 从SecurityUtils里边创建一个 subject
-        Subject subject = SecurityUtils.getSubject();
-        // 在认证提交前准备 token（令牌）
-        UsernamePasswordToken token = new UsernamePasswordToken(user.getLoginName(), user.getPassword());
-        user = adminUserMapper.getOneByCondition(user);
-        // 执行认证登陆
-        subject.login(token);
-        //根据权限，指定返回数据
-        String role = "user";
-        ResponseVo responseVo = ResponseUtils.buildResponseCode(ResponseCode.SUCCESS_CODE);
-        modelAndView.addObject(responseVo);
-        modelAndView.setViewName("admin/adminIndex");
-//        }
+        AdminUser loginUser = adminUserMapper.getOneByCondition(user);
+        if (StringUtils.isEmpty(user.getLoginName()) || StringUtils.isEmpty(user.getPassword())) {
+            log.info("用户名或密码不能为空");
+            modelAndView.addObject(ResponseUtils.buildResponseCode(ResponseCode.SHIRO_ERROR_CODE));
+            modelAndView.setViewName("/login");
+        }
+        if (loginUser == null) {
+            modelAndView.addObject(ResponseUtils.buildResponseCode(ResponseCode.SHIRO_ERROR_CODE));
+            modelAndView.setViewName("/login");
+        } else {
+            // 从SecurityUtils里边创建一个 subject
+            Subject subject = SecurityUtils.getSubject();
+            // 在认证提交前准备 token（令牌）
+            UsernamePasswordToken token = new UsernamePasswordToken(user.getLoginName(), user.getPassword());
+//            user = adminUserMapper.getOneByCondition(user);
+            // 执行认证登陆
+            subject.login(token);
+            //根据权限，指定返回数据
+            String role = "user";
+            ResponseVo responseVo = ResponseUtils.buildResponseCode(ResponseCode.SUCCESS_CODE);
+            modelAndView.addObject(responseVo);
+            modelAndView.setViewName("admin/adminIndex");
+        }
         return modelAndView;
 
     }

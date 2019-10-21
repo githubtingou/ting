@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -35,6 +36,14 @@ public class LogAspect {
     public void webLog() {
     }
 
+    @Before("webLog()")
+    public Object doTest(ProceedingJoinPoint joinPoint) {
+        Object a = null;
+
+        return "test";
+
+    }
+
     @Around("webLog()")
     public Object doBefore(ProceedingJoinPoint joinPoint) throws Throwable {
 
@@ -54,9 +63,9 @@ public class LogAspect {
      * 日志保存
      *
      * @param joinPoint
-     * @param time 用时
+     * @param time      用时
      */
-    private void saveLog(ProceedingJoinPoint joinPoint, Long time) throws Throwable{
+    private void saveLog(ProceedingJoinPoint joinPoint, Long time) throws Throwable {
         // 接收到请求，记录请求内容
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         if (attributes != null) {

@@ -53,14 +53,11 @@ public class CustomRealm extends AuthorizingRealm {
         user.setLoginName(loginUserName);
         user.setPassword(password);
         user = userMapper.getOneByCondition(user);
+
         if (StringUtils.isEmpty(password)) {
             log.error("用户名不正确");
             throw new AccountException("用户名不正确");
-        } else if (!password.equals(token.getPassword())) {
-            log.error("密码不正确");
-            throw new AccountException("密码不正确");
         }
-
         return new SimpleAuthenticationInfo(user, password, getName());
     }
 
