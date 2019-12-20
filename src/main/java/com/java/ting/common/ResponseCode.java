@@ -46,7 +46,7 @@ public enum ResponseCode {
     /**
      * 其他权限错误
      */
-    SHIRO_ERROR_OTHER(5199, null, false);
+    SHIRO_ERROR_OTHER(5199,"权限错误", false);
 
 
     private Integer code;

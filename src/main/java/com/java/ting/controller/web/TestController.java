@@ -1,4 +1,4 @@
-package com.java.ting.controller;
+package com.java.ting.controller.web;
 
 import com.java.ting.common.ResponseCode;
 import com.java.ting.common.ResponseVo;
@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-    @RequestMapping("front/test")
+    @RequestMapping("web/test")
     public ResponseVo test() {
         System.out.println("111111111111111111111111");
         return ResponseUtils.buildResponseCode(ResponseCode.SUCCESS_CODE);
     }
+
 }

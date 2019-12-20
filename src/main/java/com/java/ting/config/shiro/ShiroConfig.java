@@ -54,7 +54,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setUnauthorizedUrl("/login");
 
         // 设置拦截器
-        /**
+        /*
          * Shiro内置过滤器，可以实现权限相关的拦截器
          *  常用的过滤器：
          *      anon: 无需认证（登录）可以访问
@@ -63,16 +63,21 @@ public class ShiroConfig {
          *      perms: 该资源必须得到资源权限才可以访问
          *      role: 该资源必须得到角色权限才可以访问
          */
+
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         //游客，开发权限
-        filterChainDefinitionMap.put("/front/**", "anon");
+        filterChainDefinitionMap.put("/web/**", "anon");
+
         //用户，需要角色权限 “user”
         filterChainDefinitionMap.put("/user/**", "user");
+
         //管理员，需要角色权限 “admin”
         // filterChainDefinitionMap.put("/admin/**", "admin");
+
         //开放登陆接口
         filterChainDefinitionMap.put("/toLogin", "anon");
         filterChainDefinitionMap.put("/notRole", "anon");
+
         // 开放静态文件
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/dev/**", "anon");
@@ -82,6 +87,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/fonts/**", "anon");
         filterChainDefinitionMap.put("/img/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");
+        filterChainDefinitionMap.put("/dev/**.json", "anon");
+
         //其余接口一律拦截
         //主要这行代码必须放在所有权限设置的最后，不然会导致所有 url 都被拦截
         filterChainDefinitionMap.put("/**", "authc");
@@ -218,5 +225,6 @@ public class ShiroConfig {
     public HandlerExceptionResolver handlerExceptionResolver() {
         return new MyExceptionHandler();
     }
+
 
 }
