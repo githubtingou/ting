@@ -1,4 +1,4 @@
-#tingShiro 权限管理系统
+# tingShiro 权限管理系统
 
 ## 目录结构
    [目录地址](tree)
