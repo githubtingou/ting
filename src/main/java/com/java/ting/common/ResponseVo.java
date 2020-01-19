@@ -6,14 +6,25 @@ import lombok.Setter;
 /**
  * 公共返回类
  *
- * @param <T>
  * @author tingOu
  */
 @Setter
 @Getter
-public class ResponseVo<T> {
+public class ResponseVo {
+    /**
+     * 编号
+     */
     private Integer code;
+    /**
+     * 提示信息
+     */
     private String message;
+    /**
+     * 成功标识
+     */
     private boolean success;
-    private T data;
+    /**
+     * 返回数据
+     */
+    private Object data;
 }

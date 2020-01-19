@@ -1,5 +1,8 @@
 package com.java.ting.common;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 响应码
  *
@@ -46,24 +49,33 @@ public enum ResponseCode {
     /**
      * 其他权限错误
      */
-    SHIRO_ERROR_OTHER(5199,"权限错误", false);
+    SHIRO_ERROR_OTHER(5199, "权限错误", false);
 
 
+    /**
+     * 编号
+     */
     private Integer code;
+
+    /**
+     * 提示信息
+     */
     private String message;
+
+    /**
+     * 成功标识
+     */
     private Boolean success;
 
     ResponseCode(Integer code, String message) {
         this.code = code;
         this.message = message;
-
     }
 
     ResponseCode(Integer code, String message, Boolean success) {
         this.code = code;
         this.message = message;
         this.success = success;
-
     }
 
     public Integer getCode() {
@@ -89,6 +101,5 @@ public enum ResponseCode {
     public void setSuccess(boolean success) {
         this.success = success;
     }
-
 
 }

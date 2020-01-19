@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.ting.mapper.TeacherMapper">
+
+    <resultMap id="BaseResultMap" type="com.java.ting.domain.Teacher">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+    </resultMap>
+
+    <!-- 第一种 这个会多次查询关联表 n+1次-->
+    <resultMap id="BaseResultList" type="com.java.ting.dto.jilian.TeacherDto">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <collection property="studentList" ofType="com.java.ting.domain.Student"
+                    select="com.java.ting.mapper.StudentMapper.findStudentByTeacherId"
+                    column="{teacherId = id}"/>
+    </resultMap>
+
+
+    <!-- 第二种 利用左链接查询 效率快-->
+    <resultMap id="BaseResultLeftJoin" type="com.java.ting.dto.jilian.TeacherDto">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <collection property="studentList" resultMap="BaseStudent" />
+    </resultMap>
+
+    <resultMap id="BaseStudent" type="com.java.ting.domain.Student">
+        <id column="student_id" jdbcType="INTEGER" property="id"/>
+        <result column="student_name" jdbcType="VARCHAR" property="studentName"/>
+        <result column="teacher_id" jdbcType="INTEGER" property="teacherId"/>
+    </resultMap>
+
+    <sql id="Base_Column_List_left">
+        t.id, t.`name`, s.id as student_id, s.student_name as student_name, s.teacher_id as teacher_id
+    </sql>
+
+    <!-- 第二种 end-->
+
+    <sql id="Base_Column_List">
+        id, `name`
+    </sql>
+
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from teacher
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from teacher
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.java.ting.domain.Teacher"
+            useGeneratedKeys="true">
+        insert into teacher (`name`)
+        values (#{name,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.java.ting.domain.Teacher"
+            useGeneratedKeys="true">
+        insert into teacher
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                `name`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+        </trim>
+
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.java.ting.domain.Teacher">
+        update teacher
+        <set>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.java.ting.domain.Teacher">
+        update teacher
+        set `name` = #{name,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="findTeacherAndStudentById" resultMap="BaseResultList">
+        select
+        <include refid="Base_Column_List"/>
+        from teacher
+    </select>
+
+    <select id="findTeacherAndStudentByIdLeftJoin" resultMap="BaseResultLeftJoin">
+        select
+        <include refid="Base_Column_List_left"/>
+        from teacher t
+        left JOIN student s on t.id = s.teacher_id
+    </select>
+</mapper>

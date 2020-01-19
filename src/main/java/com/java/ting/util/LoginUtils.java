@@ -1,4 +1,4 @@
-package com.java.ting.common.utils;
+package com.java.ting.util;
 
 import com.java.ting.domain.AdminUser;
 import com.java.ting.mapper.AdminUserMapper;
@@ -18,7 +18,7 @@ public class LoginUtils {
     /**
      * 获取登录用户的用户名
      *
-     * @return
+     * @return 用户名称
      */
     public String getUserName() {
         return (String) SecurityUtils.getSubject().getPrincipal();
@@ -27,7 +27,7 @@ public class LoginUtils {
     /**
      * 获取当前登录的用户信息
      *
-     * @return
+     * @return {@link com.java.ting.domain.AdminUser} 用户信息
      */
     public AdminUser getLoginUser() {
         String username = getUserName();

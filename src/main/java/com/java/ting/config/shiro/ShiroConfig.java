@@ -4,18 +4,13 @@ import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
-import org.crazycake.shiro.RedisManager;
-import org.crazycake.shiro.RedisSessionDAO;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import java.util.LinkedHashMap;
 
@@ -27,15 +22,6 @@ import java.util.LinkedHashMap;
 @Configuration
 @Slf4j
 public class ShiroConfig {
-
-    @Value("${spring.redis.host}")
-    private String host;
-    @Value("${spring.redis.port}")
-    private int port;
-    @Value("${spring.redis.timeout}")
-    private int timeout;
-    @Value("${spring.redis.password}")
-    private String password;
 
     /**
      * 设置对应的过滤条件和跳转条件
@@ -77,6 +63,8 @@ public class ShiroConfig {
         //开放登陆接口
         filterChainDefinitionMap.put("/toLogin", "anon");
         filterChainDefinitionMap.put("/notRole", "anon");
+        // actuator配置
+        filterChainDefinitionMap.put("/actuator/**", "anon");
 
         // 开放静态文件
         filterChainDefinitionMap.put("/static/**", "anon");
@@ -124,7 +112,7 @@ public class ShiroConfig {
     /**
      * shiro cookie
      *
-     * @return
+     * @return cookie
      */
     @Bean
     public SimpleCookie cookie() {
@@ -159,40 +147,40 @@ public class ShiroConfig {
      *
      * @return
      */
-    @Bean
-    public RedisManager redisManager() {
-        RedisManager redisManager = new RedisManager();
-        redisManager.setHost(host);
-        redisManager.setPort(port);
-//        redisManager.setExpire(1800);// 配置缓存过期时间
-        redisManager.setTimeout(timeout);
-        redisManager.setPassword(password);
-        return redisManager;
-    }
+//    @Bean
+//    public RedisManager redisManager() {
+//        RedisManager redisManager = new RedisManager();
+//        redisManager.setHost(host);
+//        redisManager.setPort(port);
+////        redisManager.setExpire(1800);// 配置缓存过期时间
+//        redisManager.setTimeout(timeout);
+//        redisManager.setPassword(password);
+//        return redisManager;
+//    }
 
     /**
      * 自定义sessionManager
      *
      * @return
      */
-    @Bean
-    public SessionManager sessionManager() {
-        MySessionManager mySessionManager = new MySessionManager();
-        mySessionManager.setSessionDAO(redisSessionDAO());
-        return mySessionManager;
-    }
+//    @Bean
+//    public SessionManager sessionManager() {
+//        MySessionManager mySessionManager = new MySessionManager();
+//        mySessionManager.setSessionDAO(redisSessionDAO());
+//        return mySessionManager;
+//    }
 
-    /**
-     * RedisSessionDAO shiro sessionDao层的实现 通过redis
-     * <p>
-     * 使用的是shiro-redis开源插件
-     */
-    @Bean
-    public RedisSessionDAO redisSessionDAO() {
-        RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
-        redisSessionDAO.setRedisManager(redisManager());
-        return redisSessionDAO;
-    }
+//    /**
+//     * RedisSessionDAO shiro sessionDao层的实现 通过redis
+//     * <p>
+//     * 使用的是shiro-redis开源插件
+//     */
+//    @Bean
+//    public RedisSessionDAO redisSessionDAO() {
+//        RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
+//        redisSessionDAO.setRedisManager(redisManager());
+//        return redisSessionDAO;
+//    }
 
     /**
      * 开启shiro aop注解支持.
@@ -221,10 +209,10 @@ public class ShiroConfig {
      *
      * @return
      */
-    @Bean(name = "exceptionHandler")
-    public HandlerExceptionResolver handlerExceptionResolver() {
-        return new MyExceptionHandler();
-    }
+//    @Bean(name = "exceptionHandler")
+//    public HandlerExceptionResolver handlerExceptionResolver() {
+//        return new MyExceptionHandler();
+//    }
 
 
 }

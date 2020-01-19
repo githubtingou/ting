@@ -3,7 +3,7 @@ package com.java.ting.config;
 import com.alibaba.fastjson.JSON;
 import com.java.ting.common.ResponseCode;
 import com.java.ting.common.ResponseVo;
-import com.java.ting.common.utils.ResponseUtils;
+import com.java.ting.util.ResponseUtils;
 import com.java.ting.domain.AdminUser;
 import com.java.ting.mapper.AdminUserMapper;
 import lombok.extern.slf4j.Slf4j;
