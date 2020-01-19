@@ -1,0 +1,136 @@
+├─main
+│  ├─java
+│  │  └─com
+│  │      └─java
+│  │          └─ting
+│  │              ├─common
+│  │              │  └─page
+│  │              ├─config
+│  │              │  ├─aspect
+│  │              │  ├─Exception
+│  │              │  ├─filter
+│  │              │  ├─interceptor
+│  │              │  ├─rabbitmq
+│  │              │  └─shiro
+│  │              ├─controller
+│  │              │  └─web
+│  │              │      └─rabbitmq
+│  │              ├─domain
+│  │              ├─dto
+│  │              │  ├─jilian
+│  │              │  └─rabbitmq
+│  │              ├─mapper
+│  │              ├─rabbitmq
+│  │              ├─service
+│  │              │  └─redis
+│  │              └─util
+│  └─resources
+│      ├─config
+│      │  ├─dev
+│      │  ├─prod
+│      │  └─test
+│      ├─mybatis
+│      ├─SQL
+│      ├─static
+│      │  └─dev
+│      │      ├─AdminLTE-2.4.5
+│      │      │  ├─css
+│      │      │  │  ├─alt
+│      │      │  │  └─skins
+│      │      │  ├─img
+│      │      │  │  └─credit
+│      │      │  └─js
+│      │      │      └─pages
+│      │      ├─bootstrap
+│      │      │  └─v3.3.7
+│      │      │      ├─css
+│      │      │      ├─fonts
+│      │      │      └─js
+│      │      ├─bootstrap-table-1.11.0
+│      │      │  ├─export
+│      │      │  └─locale
+│      │      ├─EChart
+│      │      ├─font-awesome
+│      │      │  ├─css
+│      │      │  ├─fonts
+│      │      │  ├─less
+│      │      │  └─scss
+│      │      ├─images
+│      │      │  └─Tomcat
+│      │      ├─jQuery
+│      │      ├─jquery-asDatepicker
+│      │      │  ├─css
+│      │      │  ├─demo
+│      │      │  │  ├─css
+│      │      │  │  └─js
+│      │      │  ├─images
+│      │      │  ├─js
+│      │      │  └─less
+│      │      ├─jquery-plugins
+│      │      ├─jquery-validation-1.19.1
+│      │      │  ├─demo
+│      │      │  │  ├─bootstrap
+│      │      │  │  ├─captcha
+│      │      │  │  │  ├─fonts
+│      │      │  │  │  └─images
+│      │      │  │  ├─cinema
+│      │      │  │  ├─css
+│      │      │  │  ├─images
+│      │      │  │  ├─login
+│      │      │  │  │  └─images
+│      │      │  │  ├─marketo
+│      │      │  │  │  └─images
+│      │      │  │  ├─milk
+│      │      │  │  ├─multipart
+│      │      │  │  ├─requirejs
+│      │      │  │  ├─semantic-ui
+│      │      │  │  ├─tinymce
+│      │      │  │  │  └─themes
+│      │      │  │  │      └─simple
+│      │      │  │  │          ├─img
+│      │      │  │  │          ├─langs
+│      │      │  │  │          └─skins
+│      │      │  │  │              └─default
+│      │      │  │  └─tinymce4
+│      │      │  ├─dist
+│      │      │  │  └─localization
+│      │      │  ├─lib
+│      │      │  ├─src
+│      │      │  │  ├─additional
+│      │      │  │  └─localization
+│      │      │  └─test
+│      │      │      └─additional
+│      │      ├─jquery-ztree
+│      │      │  └─3.5
+│      │      │      ├─css
+│      │      │      │  ├─default
+│      │      │      │  │  └─img
+│      │      │      │  │      └─diy
+│      │      │      │  ├─metro
+│      │      │      │  │  └─img
+│      │      │      │  └─simple
+│      │      │      │      └─img
+│      │      │      └─js
+│      │      ├─layer
+│      │      │  └─3.1
+│      │      │      ├─mobile
+│      │      │      │  └─need
+│      │      │      └─skin
+│      │      │          └─default
+│      │      ├─my97
+│      │      │  ├─lang
+│      │      │  └─skin
+│      │      │      ├─default
+│      │      │      ├─twoer
+│      │      │      └─whyGreen
+│      │      └─select2
+│      │          └─4.0
+│      │              └─i18n
+│      └─templates
+│          ├─admin
+│          └─common
+└─test
+    └─java
+        └─com
+            └─java
+                └─ting
