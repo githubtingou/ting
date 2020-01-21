@@ -2,6 +2,7 @@ package com.java.ting.common;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * 公共返回类
@@ -10,6 +11,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
+@Accessors(chain = true)
 public class ResponseVo {
     /**
      * 编号

@@ -29,5 +29,6 @@ public class ConsumerConfig {
     @RabbitHandler
     public void process(String payload, Channel channel, Message message) {
         log.info("获取生产者传输的需要消费的数据：{}", payload);
+
     }
 }

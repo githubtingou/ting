@@ -2,6 +2,7 @@ package com.java.ting.common.page;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * 分页返参数据
@@ -11,6 +12,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@Accessors(chain = true)
 public class PageModelDto {
     /**
      * 当前页

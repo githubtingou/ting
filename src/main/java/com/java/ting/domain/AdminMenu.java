@@ -15,6 +15,7 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 @Getter
 @Setter
+@Accessors(chain = true)
 public class AdminMenu implements Serializable {
 
     /**

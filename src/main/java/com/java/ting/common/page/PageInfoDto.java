@@ -3,6 +3,7 @@ package com.java.ting.common.page;
 import com.github.pagehelper.PageInfo;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import org.springframework.util.ObjectUtils;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 @Getter
 @Setter
+@Accessors(chain = true)
 public class PageInfoDto {
 
     /**

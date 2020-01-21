@@ -2,6 +2,7 @@ package com.java.ting.dto.rabbitmq;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * rabbitmq 信息发送类
@@ -11,6 +12,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@Accessors(chain = true)
 public class RabbitMqDto {
 
     /**

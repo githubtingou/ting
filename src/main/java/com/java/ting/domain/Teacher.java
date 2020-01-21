@@ -2,6 +2,7 @@ package com.java.ting.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
@@ -12,6 +13,7 @@ import java.io.Serializable;
  */
 @Getter
 @Setter
+@Accessors(chain = true)
 public class Teacher implements Serializable {
 
     private static final long serialVersionUID = 1L;

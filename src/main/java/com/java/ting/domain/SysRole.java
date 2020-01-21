@@ -2,6 +2,7 @@ package com.java.ting.domain;
 import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 
 /**
@@ -12,6 +13,7 @@ import lombok.Setter;
 @SuppressWarnings("serial")
 @Getter
 @Setter
+@Accessors(chain = true)
 public class SysRole implements Serializable {
 
 	/**主键**/
