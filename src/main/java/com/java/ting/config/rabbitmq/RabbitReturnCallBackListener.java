@@ -1,7 +1,6 @@
 package com.java.ting.config.rabbitmq;
 
 import com.alibaba.fastjson.JSON;
-import domain.Teacher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

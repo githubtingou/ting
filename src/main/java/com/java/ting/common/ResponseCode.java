@@ -44,13 +44,16 @@ public enum ResponseCode {
     /**
      * 用户名或密码不能为空
      */
-    SHIRO_ERROR_NOUSER(5103, "用户名或密码不能为空", false),
+    SHIRO_ERROR_EMPTY_NAME_OR_PASSWORD(5103, "用户名或密码不能为空", false),
+    /**
+     * 无该用户信息
+     */
+    SHIRO_ERROR_NO_USER(5103, "系统中暂无该用户信息", false),
 
     /**
      * 其他权限错误
      */
     SHIRO_ERROR_OTHER(5199, "权限错误", false);
-
 
     /**
      * 编号

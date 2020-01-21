@@ -12,6 +12,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -62,7 +63,7 @@ public class LoginConfig {
             modelAndView.addObject(ResponseUtils.buildResponseCode(ResponseCode.SHIRO_ERROR_CODE));
             modelAndView.setViewName("/login");
         }
-        if (loginUser == null) {
+        if (ObjectUtils.isEmpty(loginUser)) {
             modelAndView.addObject(ResponseUtils.buildResponseCode(ResponseCode.SHIRO_ERROR_CODE));
             modelAndView.setViewName("/login");
         } else {

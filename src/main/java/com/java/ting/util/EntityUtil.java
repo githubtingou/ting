@@ -56,11 +56,11 @@ public class EntityUtil {
      */
     private final String moduleName = "ting";
 
-    private final String bean_path = "E:\\entity_bean_lcs";
+    private final String bean_path = "D:\\entityUtils/bean";
 
-    private final String mapper_path = "E:\\entity_mapper_lcs";
+    private final String mapper_path = "D:\\entityUtils/mapper";
 
-    private final String xml_path = "E:\\entity_mapper_lcs/xml";
+    private final String xml_path = "D:\\entityUtils/xml";
 
     private final String bean_package = "com.java." + moduleName + ".entity";
     private final String mapper_package = "com.java." + moduleName + ".mapper";
@@ -205,7 +205,7 @@ public class EntityUtil {
      * @return
      * @throws IOException
      */
-    private BufferedWriter buildMethodComment(BufferedWriter bw, String text) throws IOException {
+    private BufferedWriter buildMethodComment(BufferedWriter bw, String text, String... params) throws IOException {
         bw.newLine();
         bw.write("\t/**");
         bw.newLine();
@@ -214,6 +214,12 @@ public class EntityUtil {
         bw.write("\t * " + text);
         bw.newLine();
         bw.write("\t *");
+        bw.newLine();
+        for (String param : params) {
+            bw.write("\t * @param " + param);
+        }
+        bw.newLine();
+        bw.write("\t * @return ");
         bw.newLine();
         bw.write("\t **/");
         return bw;
@@ -237,7 +243,7 @@ public class EntityUtil {
             throws IOException {
         File folder = new File(bean_path);
         if (!folder.exists()) {
-            folder.mkdir();
+            folder.mkdirs();
         }
 
         File beanFile = new File(bean_path, beanName + ".java");
@@ -250,6 +256,8 @@ public class EntityUtil {
         bw.newLine();
         bw.write("import lombok.Setter;");
         bw.newLine();
+        bw.write("import lombok.experimental.Accessors;");
+        bw.newLine();
         //bw.write("import lombok.Data;");
         //      bw.write("import javax.persistence.Entity;");
         bw = buildClassComment(bw, tableComment);
@@ -261,6 +269,8 @@ public class EntityUtil {
         bw.write("@Getter");
         bw.newLine();
         bw.write("@Setter");
+        bw.newLine();
+        bw.write("@Accessors(chain = true)");
         bw.newLine();
         bw.write("public class " + beanName + " implements Serializable {");
         bw.newLine();
@@ -311,35 +321,35 @@ public class EntityUtil {
         bw.newLine();
         bw.newLine();
         // ----------定义Mapper中的方法Begin----------
-        bw = buildMethodComment(bw, "查询（根据主键ID查询）");
+        bw = buildMethodComment(bw, "查询（根据主键ID查询）", "id");
         bw.newLine();
         bw.write("\t" + beanName + "  selectByPrimaryKey ( @Param(\"id\") Integer id );");
         bw.newLine();
-        bw = buildMethodComment(bw, "添加");
+        bw = buildMethodComment(bw, "添加", lowerbeanName);
         bw.newLine();
         bw.write("\t" + "int insert( " + beanName + " " + lowerbeanName + " );");
         bw.newLine();
-        bw = buildMethodComment(bw, "添加 （匹配有值的字段）");
+        bw = buildMethodComment(bw, "添加 （匹配有值的字段）", lowerbeanName);
         bw.newLine();
         bw.write("\t" + "int insertSelective( " + beanName + " " + lowerbeanName + " );");
         bw.newLine();
-        bw = buildMethodComment(bw, "修改 （匹配有值的字段）");
+        bw = buildMethodComment(bw, "修改 （匹配有值的字段）", lowerbeanName);
         bw.newLine();
         bw.write("\t" + "int updateByPrimaryKeySelective( " + beanName + " " + lowerbeanName + " );");
         bw.newLine();
-        bw = buildMethodComment(bw, "分页查询</br>eg: xx.getByPage(null, 0, 3, \"id\", \"desc\");");
+        bw = buildMethodComment(bw, "分页查询</br>eg: xx.getByPage(null, 0, 3, \"id\", \"desc\");", lowerbeanName);
         bw.newLine();
         bw.write("\t" + "List<" + beanName + "> getByPage (@Param(\"" + lowerbeanName + "\") " + beanName + " " + lowerbeanName + ", @Param(\"start\") Integer start, @Param(\"limit\") Integer limit, @Param(\"orderColumn\") String orderColumn, @Param(\"orderType\") String orderType );");
         bw.newLine();
-        bw = buildMethodComment(bw, "根据实体属性查询");
+        bw = buildMethodComment(bw, "根据实体属性查询", lowerbeanName);
         bw.newLine();
         bw.write("\t" + "List<" + beanName + "> getListByCondition (@Param(\"" + lowerbeanName + "\") " + beanName + " " + lowerbeanName + " );");
         bw.newLine();
-        bw = buildMethodComment(bw, "根据实体属性查询");
+        bw = buildMethodComment(bw, "根据实体属性查询", lowerbeanName);
         bw.newLine();
         bw.write("\t" + "int getCountByCondition (@Param(\"" + lowerbeanName + "\") " + beanName + " " + lowerbeanName + " );");
         bw.newLine();
-        bw = buildMethodComment(bw, "查询单条数据");
+        bw = buildMethodComment(bw, "查询单条数据", lowerbeanName);
         bw.newLine();
         bw.write("\t" + beanName + " getOneByCondition (@Param(\"" + lowerbeanName + "\") " + beanName + " " + lowerbeanName + " );");
         bw.newLine();

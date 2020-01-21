@@ -66,6 +66,11 @@ public interface SysLogMapper{
 	 * 查询单条数据
 	 *
 	 **/
+	/**
+	 *
+	 * @param sysLog
+	 * @return
+	 */
 	SysLog getOneByCondition(@Param("sysLog") SysLog sysLog);
 
 }

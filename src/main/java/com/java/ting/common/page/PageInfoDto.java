@@ -32,7 +32,9 @@ public class PageInfoDto {
      */
     private int count;
 
-
+    /**
+     * 无参构造方法
+     */
     public PageInfoDto() {
 
     }
@@ -43,7 +45,7 @@ public class PageInfoDto {
      * @param rows  返回的数据
      * @param total 总数
      */
-    public PageInfoDto(List<Object> rows, int total) {
+    public PageInfoDto(List rows, int total) {
         this.total = total;
         this.rows = rows;
         this.count = ObjectUtils.isEmpty(rows) ? 0 : rows.size();

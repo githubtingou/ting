@@ -1,4 +1,4 @@
-package com.java.ting.config.Exception;
+package com.java.ting.config.exception;
 
 import com.java.ting.common.ResponseCode;
 

@@ -1,4 +1,4 @@
-package com.java.ting.config.Exception;
+package com.java.ting.config.exception;
 
 import com.java.ting.common.ResponseCode;
 import com.java.ting.common.ResponseVo;
@@ -27,7 +27,6 @@ import java.util.List;
 @Slf4j
 public class ExceptionHandle {
 
-
     /**
      * 全局异常处理
      *
@@ -39,38 +38,44 @@ public class ExceptionHandle {
     @ResponseBody
     public ResponseVo exceptionHandel(HttpServletRequest request, HttpServletResponse response, Exception e) {
 
-        /*
-         * 自定义异常处理
-         */
+        //自定义异常处理
         if (e instanceof MyException) {
             MyException myException = (MyException) e;
             return ResponseUtils.buildResponseDtoError(myException.getErrorCode(), myException.getShowMsg());
         }
-        /*
-         * valid 异常处理
-         */
+
+        // valid 异常处理
         if (e instanceof MethodArgumentNotValidException) {
-            BindingResult bindingResult = ((MethodArgumentNotValidException) e).getBindingResult();
-            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-            StringBuilder sb = new StringBuilder();
-            for (FieldError fieldError : fieldErrors) {
-                /* 获取valid定义的message */
-
-                // 字段value
-                Object rejectedValue = fieldError.getRejectedValue();
-
-                // 字段key
-                String field = fieldError.getField();
-
-                // message
-                String defaultMessage = fieldError.getDefaultMessage();
-                sb.append(defaultMessage).append(";");
-            }
-            return ResponseUtils.buildResponseDtoError(ResponseCode.ERROE_CODE, sb.toString());
+            return ResponseUtils.buildResponseDtoError(ResponseCode.ERROE_CODE, validException(e));
 
         }
         log.error("错误信息，", e);
         return ResponseUtils.buildResponseDtoError(ResponseCode.ERROE_CODE, e.getMessage());
+
+    }
+
+    /**
+     * valid 异常处理
+     * MethodArgumentNotValidException
+     *
+     * @param e 异常
+     * @return valid错误信息
+     */
+    private String validException(Exception e) {
+        BindingResult bindingResult = ((MethodArgumentNotValidException) e).getBindingResult();
+        List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+        StringBuilder sb = new StringBuilder();
+        for (FieldError fieldError : fieldErrors) {
+            /* 获取valid定义的message */
+            // 字段value
+            Object rejectedValue = fieldError.getRejectedValue();
+            // 字段key
+            String field = fieldError.getField();
+            // message
+            String defaultMessage = fieldError.getDefaultMessage();
+            sb.append(defaultMessage).append(";");
+        }
+        return sb.toString();
 
     }
 

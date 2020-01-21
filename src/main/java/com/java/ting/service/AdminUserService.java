@@ -5,11 +5,11 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.java.ting.common.ResponseCode;
 import com.java.ting.common.ResponseVo;
-import com.java.ting.util.ResponseUtils;
-import com.java.ting.domain.AdminUser;
 import com.java.ting.common.page.PageInfoDto;
 import com.java.ting.common.page.PageModelDto;
+import com.java.ting.domain.AdminUser;
 import com.java.ting.mapper.AdminUserMapper;
+import com.java.ting.util.ResponseUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,7 @@ public class AdminUserService {
         PageHelper.startPage(pageModelDto.getCurrentPage(), pageModelDto.getPageSize());
         List<AdminUser> listByCondition = adminUserMapper.getListByCondition(new AdminUser());
         PageInfo<AdminUser> pageInfo = new PageInfo<>(listByCondition);
-        log.info(JSON.toJSONString(pageInfo));
+        log.info("分页数据：{}", JSON.toJSONString(pageInfo));
         return ResponseUtils.buildResponseCode(ResponseCode.SUCCESS_CODE, new PageInfoDto(pageInfo));
     }
 

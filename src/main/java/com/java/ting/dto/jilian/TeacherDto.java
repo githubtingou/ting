@@ -3,6 +3,7 @@ package com.java.ting.dto.jilian;
 import com.java.ting.domain.Student;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  */
 @Getter
 @Setter
+@Accessors(chain = true)
 public class TeacherDto {
 
     /**
