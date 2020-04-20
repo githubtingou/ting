@@ -5,7 +5,7 @@ import org.apache.shiro.crypto.UnknownAlgorithmException;
 import org.apache.shiro.crypto.hash.SimpleHash;
 
 /**
- * shiro密码加密 测试
+ * shiro密码加密 测试123456
  *
  *
  * @author LISHUANG
