@@ -22,6 +22,7 @@ import java.util.Set;
 /**
  * 自定义身份认证测试
  *
+ * @version 1.0test
  * @author tingOu
  */
 @Slf4j
