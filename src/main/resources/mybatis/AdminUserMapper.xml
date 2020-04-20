@@ -1,551 +1,553 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.java.ting.mapper.AdminUserMapper">
 
-	<!--实体映射-->
-	<resultMap id="BaseResultMap" type="com.java.ting.domain.AdminUser">
-		<id property="id" column="id" />
-		<result property="loginName" column="login_name" />
-		<result property="loginImg" column="login_img" />
-		<result property="realName" column="real_name" />
-		<result property="password" column="password" />
-		<result property="email" column="email" />
-		<result property="sex" column="sex" />
-		<result property="mobile" column="mobile" />
-		<result property="sign" column="sign" />
-		<result property="age" column="age" />
-		<result property="addUser" column="add_user" />
-		<result property="addTime" column="add_time" />
-		<result property="updateUser" column="update_user" />
-		<result property="updateTime" column="update_time" />
-		<result property="freezeCause" column="freeze_cause" />
-		<result property="freezeDate" column="freeze_date" />
-		<result property="delFlag" column="del_flag" />
-		<result property="loginFlag" column="login_flag" />
-		<result property="loginIp" column="login_ip" />
-		<result property="loginDate" column="login_date" />
-		<result property="remarks" column="remarks" />
-	</resultMap>
+    <!--实体映射-->
+    <resultMap id="BaseResultMap" type="com.java.ting.domain.AdminUser">
+        <id property="id" column="id"/>
+        <result property="loginName" column="login_name"/>
+        <result property="loginImg" column="login_img"/>
+        <result property="realName" column="real_name"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
+        <result property="sex" column="sex"/>
+        <result property="mobile" column="mobile"/>
+        <result property="sign" column="sign"/>
+        <result property="age" column="age"/>
+        <result property="addUser" column="add_user"/>
+        <result property="addTime" column="add_time"/>
+        <result property="updateUser" column="update_user"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="freezeCause" column="freeze_cause"/>
+        <result property="freezeDate" column="freeze_date"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="loginFlag" column="login_flag"/>
+        <result property="loginIp" column="login_ip"/>
+        <result property="loginDate" column="login_date"/>
+        <result property="remarks" column="remarks"/>
+    </resultMap>
 
 
-	<!-- 通用查询结果列-->
-	<sql id="Base_Column_List">
-		 id,	login_name,	login_img,	real_name,	password,	email,	sex,	mobile,	sign,	age,	add_user,	add_time,	update_user,	update_time,	freeze_cause,	freeze_date,	del_flag,	login_flag,	login_ip,	login_date,	remarks
-	</sql>
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
+        id,	login_name,	login_img,	real_name,	password,	email,	sex,	mobile,	sign,	age,	add_user,	add_time,	update_user,	update_time,	freeze_cause,	freeze_date,	del_flag,	login_flag,	login_ip,	login_date,	remarks
+    </sql>
 
-	<!-- 查询（根据主键ID查询） -->
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-		 SELECT
-		 <include refid="Base_Column_List" />
-		 FROM admin_user
-		 WHERE id = #{id}
-	</select>
+    <!-- 查询（根据主键ID查询） -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM admin_user
+        WHERE id = #{id}
+    </select>
 
-	<!-- 分页查询 -->
-	<select id="getByPage" resultMap="BaseResultMap" resultType="com.java.ting.domain.AdminUser">
-		 SELECT
-		 <include refid="Base_Column_List" />
-		 FROM admin_user where del_flag =0 
-		 <if test=" adminUser != null">
-			<if test="adminUser.id != null">
-			   and id = #{adminUser.id}
-			</if>
-			<if test="adminUser.loginName != null">
-			   and login_name = #{adminUser.loginName}
-			</if>
-			<if test="adminUser.loginImg != null">
-			   and login_img = #{adminUser.loginImg}
-			</if>
-			<if test="adminUser.realName != null">
-			   and real_name = #{adminUser.realName}
-			</if>
-			<if test="adminUser.password != null">
-			   and password = #{adminUser.password}
-			</if>
-			<if test="adminUser.email != null">
-			   and email = #{adminUser.email}
-			</if>
-			<if test="adminUser.sex != null">
-			   and sex = #{adminUser.sex}
-			</if>
-			<if test="adminUser.mobile != null">
-			   and mobile = #{adminUser.mobile}
-			</if>
-			<if test="adminUser.sign != null">
-			   and sign = #{adminUser.sign}
-			</if>
-			<if test="adminUser.age != null">
-			   and age = #{adminUser.age}
-			</if>
-			<if test="adminUser.addUser != null">
-			   and add_user = #{adminUser.addUser}
-			</if>
-			<if test="adminUser.addTime != null">
-			   and add_time = #{adminUser.addTime}
-			</if>
-			<if test="adminUser.updateUser != null">
-			   and update_user = #{adminUser.updateUser}
-			</if>
-			<if test="adminUser.updateTime != null">
-			   and update_time = #{adminUser.updateTime}
-			</if>
-			<if test="adminUser.freezeCause != null">
-			   and freeze_cause = #{adminUser.freezeCause}
-			</if>
-			<if test="adminUser.freezeDate != null">
-			   and freeze_date = #{adminUser.freezeDate}
-			</if>
-			<if test="adminUser.delFlag != null">
-			   and del_flag = #{adminUser.delFlag}
-			</if>
-			<if test="adminUser.loginFlag != null">
-			   and login_flag = #{adminUser.loginFlag}
-			</if>
-			<if test="adminUser.loginIp != null">
-			   and login_ip = #{adminUser.loginIp}
-			</if>
-			<if test="adminUser.loginDate != null">
-			   and login_date = #{adminUser.loginDate}
-			</if>
-			<if test="adminUser.remarks != null">
-			   and remarks = #{adminUser.remarks}
-			</if>
-		 </if>
-		 <if test="orderColumn != null">
-			 order by ${orderColumn} 
-		 </if>
-		 <if test="orderType != null">
-			 ${orderType} 
-		 </if>
-		 <if test="start != null and limit != null">
-			 limit #{start}, #{limit}
-		 </if>
-	</select>
+    <!-- 分页查询 -->
+    <select id="getByPage" resultMap="BaseResultMap" resultType="com.java.ting.domain.AdminUser">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM admin_user where del_flag =0
+        <if test=" adminUser != null">
+            <if test="adminUser.id != null">
+                and id = #{adminUser.id}
+            </if>
+            <if test="adminUser.loginName != null">
+                and login_name = #{adminUser.loginName}
+            </if>
+            <if test="adminUser.loginImg != null">
+                and login_img = #{adminUser.loginImg}
+            </if>
+            <if test="adminUser.realName != null">
+                and real_name = #{adminUser.realName}
+            </if>
+            <if test="adminUser.password != null">
+                and password = #{adminUser.password}
+            </if>
+            <if test="adminUser.email != null">
+                and email = #{adminUser.email}
+            </if>
+            <if test="adminUser.sex != null">
+                and sex = #{adminUser.sex}
+            </if>
+            <if test="adminUser.mobile != null">
+                and mobile = #{adminUser.mobile}
+            </if>
+            <if test="adminUser.sign != null">
+                and sign = #{adminUser.sign}
+            </if>
+            <if test="adminUser.age != null">
+                and age = #{adminUser.age}
+            </if>
+            <if test="adminUser.addUser != null">
+                and add_user = #{adminUser.addUser}
+            </if>
+            <if test="adminUser.addTime != null">
+                and add_time = #{adminUser.addTime}
+            </if>
+            <if test="adminUser.updateUser != null">
+                and update_user = #{adminUser.updateUser}
+            </if>
+            <if test="adminUser.updateTime != null">
+                and update_time = #{adminUser.updateTime}
+            </if>
+            <if test="adminUser.freezeCause != null">
+                and freeze_cause = #{adminUser.freezeCause}
+            </if>
+            <if test="adminUser.freezeDate != null">
+                and freeze_date = #{adminUser.freezeDate}
+            </if>
+            <if test="adminUser.delFlag != null">
+                and del_flag = #{adminUser.delFlag}
+            </if>
+            <if test="adminUser.loginFlag != null">
+                and login_flag = #{adminUser.loginFlag}
+            </if>
+            <if test="adminUser.loginIp != null">
+                and login_ip = #{adminUser.loginIp}
+            </if>
+            <if test="adminUser.loginDate != null">
+                and login_date = #{adminUser.loginDate}
+            </if>
+            <if test="adminUser.remarks != null">
+                and remarks = #{adminUser.remarks}
+            </if>
+        </if>
+        <if test="orderColumn != null">
+            order by #{orderColumn}
+        </if>
+        <if test="orderType != null">
+            #{orderType}
+        </if>
+        <if test="start != null and limit != null">
+            limit #{start}, #{limit}
+        </if>
+    </select>
 
-	<!-- 简单查询 -->
-	<select id="getListByCondition" resultMap="BaseResultMap" resultType="com.java.ting.domain.AdminUser">
-		 SELECT
-		 <include refid="Base_Column_List" />
-		 FROM admin_user where del_flag = 0 
-		 <if test=" adminUser != null">
-			<if test="adminUser.id != null">
-			   and id = #{adminUser.id}
-			</if>
-			<if test="adminUser.loginName != null">
-			   and login_name = #{adminUser.loginName}
-			</if>
-			<if test="adminUser.loginImg != null">
-			   and login_img = #{adminUser.loginImg}
-			</if>
-			<if test="adminUser.realName != null">
-			   and real_name = #{adminUser.realName}
-			</if>
-			<if test="adminUser.password != null">
-			   and password = #{adminUser.password}
-			</if>
-			<if test="adminUser.email != null">
-			   and email = #{adminUser.email}
-			</if>
-			<if test="adminUser.sex != null">
-			   and sex = #{adminUser.sex}
-			</if>
-			<if test="adminUser.mobile != null">
-			   and mobile = #{adminUser.mobile}
-			</if>
-			<if test="adminUser.sign != null">
-			   and sign = #{adminUser.sign}
-			</if>
-			<if test="adminUser.age != null">
-			   and age = #{adminUser.age}
-			</if>
-			<if test="adminUser.addUser != null">
-			   and add_user = #{adminUser.addUser}
-			</if>
-			<if test="adminUser.addTime != null">
-			   and add_time = #{adminUser.addTime}
-			</if>
-			<if test="adminUser.updateUser != null">
-			   and update_user = #{adminUser.updateUser}
-			</if>
-			<if test="adminUser.updateTime != null">
-			   and update_time = #{adminUser.updateTime}
-			</if>
-			<if test="adminUser.freezeCause != null">
-			   and freeze_cause = #{adminUser.freezeCause}
-			</if>
-			<if test="adminUser.freezeDate != null">
-			   and freeze_date = #{adminUser.freezeDate}
-			</if>
-			<if test="adminUser.delFlag != null">
-			   and del_flag = #{adminUser.delFlag}
-			</if>
-			<if test="adminUser.loginFlag != null">
-			   and login_flag = #{adminUser.loginFlag}
-			</if>
-			<if test="adminUser.loginIp != null">
-			   and login_ip = #{adminUser.loginIp}
-			</if>
-			<if test="adminUser.loginDate != null">
-			   and login_date = #{adminUser.loginDate}
-			</if>
-			<if test="adminUser.remarks != null">
-			   and remarks = #{adminUser.remarks}
-			</if>
-		 </if>
-	</select>
+    <!-- 简单查询 -->
+    <select id="getListByCondition" resultMap="BaseResultMap" resultType="com.java.ting.domain.AdminUser">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM admin_user where del_flag = 0
+        <if test=" adminUser != null">
+            <if test="adminUser.id != null">
+                and id = #{adminUser.id}
+            </if>
+            <if test="adminUser.loginName != null">
+                and login_name = #{adminUser.loginName}
+            </if>
+            <if test="adminUser.loginImg != null">
+                and login_img = #{adminUser.loginImg}
+            </if>
+            <if test="adminUser.realName != null">
+                and real_name = #{adminUser.realName}
+            </if>
+            <if test="adminUser.password != null">
+                and password = #{adminUser.password}
+            </if>
+            <if test="adminUser.email != null">
+                and email = #{adminUser.email}
+            </if>
+            <if test="adminUser.sex != null">
+                and sex = #{adminUser.sex}
+            </if>
+            <if test="adminUser.mobile != null">
+                and mobile = #{adminUser.mobile}
+            </if>
+            <if test="adminUser.sign != null">
+                and sign = #{adminUser.sign}
+            </if>
+            <if test="adminUser.age != null">
+                and age = #{adminUser.age}
+            </if>
+            <if test="adminUser.addUser != null">
+                and add_user = #{adminUser.addUser}
+            </if>
+            <if test="adminUser.addTime != null">
+                and add_time = #{adminUser.addTime}
+            </if>
+            <if test="adminUser.updateUser != null">
+                and update_user = #{adminUser.updateUser}
+            </if>
+            <if test="adminUser.updateTime != null">
+                and update_time = #{adminUser.updateTime}
+            </if>
+            <if test="adminUser.freezeCause != null">
+                and freeze_cause = #{adminUser.freezeCause}
+            </if>
+            <if test="adminUser.freezeDate != null">
+                and freeze_date = #{adminUser.freezeDate}
+            </if>
+            <if test="adminUser.delFlag != null">
+                and del_flag = #{adminUser.delFlag}
+            </if>
+            <if test="adminUser.loginFlag != null">
+                and login_flag = #{adminUser.loginFlag}
+            </if>
+            <if test="adminUser.loginIp != null">
+                and login_ip = #{adminUser.loginIp}
+            </if>
+            <if test="adminUser.loginDate != null">
+                and login_date = #{adminUser.loginDate}
+            </if>
+            <if test="adminUser.remarks != null">
+                and remarks = #{adminUser.remarks}
+            </if>
+        </if>
+    </select>
 
-	<!-- 单条查询 -->
-	<select id="getOneByCondition" resultMap="BaseResultMap" resultType="com.java.ting.domain.AdminUser">
-		 SELECT
-		 <include refid="Base_Column_List" />
-		 FROM admin_user where del_flag = 0 
-		 <if test=" adminUser != null">
-			<if test="adminUser.id != null">
-			   and id = #{adminUser.id}
-			</if>
-			<if test="adminUser.loginName != null">
-			   and login_name = #{adminUser.loginName}
-			</if>
-			<if test="adminUser.loginImg != null">
-			   and login_img = #{adminUser.loginImg}
-			</if>
-			<if test="adminUser.realName != null">
-			   and real_name = #{adminUser.realName}
-			</if>
-			<if test="adminUser.password != null">
-			   and password = #{adminUser.password}
-			</if>
-			<if test="adminUser.email != null">
-			   and email = #{adminUser.email}
-			</if>
-			<if test="adminUser.sex != null">
-			   and sex = #{adminUser.sex}
-			</if>
-			<if test="adminUser.mobile != null">
-			   and mobile = #{adminUser.mobile}
-			</if>
-			<if test="adminUser.sign != null">
-			   and sign = #{adminUser.sign}
-			</if>
-			<if test="adminUser.age != null">
-			   and age = #{adminUser.age}
-			</if>
-			<if test="adminUser.addUser != null">
-			   and add_user = #{adminUser.addUser}
-			</if>
-			<if test="adminUser.addTime != null">
-			   and add_time = #{adminUser.addTime}
-			</if>
-			<if test="adminUser.updateUser != null">
-			   and update_user = #{adminUser.updateUser}
-			</if>
-			<if test="adminUser.updateTime != null">
-			   and update_time = #{adminUser.updateTime}
-			</if>
-			<if test="adminUser.freezeCause != null">
-			   and freeze_cause = #{adminUser.freezeCause}
-			</if>
-			<if test="adminUser.freezeDate != null">
-			   and freeze_date = #{adminUser.freezeDate}
-			</if>
-			<if test="adminUser.delFlag != null">
-			   and del_lag = #{adminUser.delFlag}
-			</if>
-			<if test="adminUser.loginFlag != null">
-			   and login_flag = #{adminUser.loginFlag}
-			</if>
-			<if test="adminUser.loginIp != null">
-			   and login_ip = #{adminUser.loginIp}
-			</if>
-			<if test="adminUser.loginDate != null">
-			   and login_date = #{adminUser.loginDate}
-			</if>
-			<if test="adminUser.remarks != null">
-			   and remarks = #{adminUser.remarks}
-			</if>
-		 </if>
-	</select>
+    <!-- 单条查询 -->
+    <select id="getOneByCondition" resultMap="BaseResultMap" resultType="com.java.ting.domain.AdminUser">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM admin_user where del_flag = 0
+        <if test=" adminUser != null">
+            <if test="adminUser.id != null">
+                and id = #{adminUser.id}
+            </if>
+            <if test="adminUser.loginName != null">
+                and login_name = #{adminUser.loginName}
+            </if>
+            <if test="adminUser.loginImg != null">
+                and login_img = #{adminUser.loginImg}
+            </if>
+            <if test="adminUser.realName != null">
+                and real_name = #{adminUser.realName}
+            </if>
+            <if test="adminUser.password != null">
+                and password = #{adminUser.password}
+            </if>
+            <if test="adminUser.email != null">
+                and email = #{adminUser.email}
+            </if>
+            <if test="adminUser.sex != null">
+                and sex = #{adminUser.sex}
+            </if>
+            <if test="adminUser.mobile != null">
+                and mobile = #{adminUser.mobile}
+            </if>
+            <if test="adminUser.sign != null">
+                and sign = #{adminUser.sign}
+            </if>
+            <if test="adminUser.age != null">
+                and age = #{adminUser.age}
+            </if>
+            <if test="adminUser.addUser != null">
+                and add_user = #{adminUser.addUser}
+            </if>
+            <if test="adminUser.addTime != null">
+                and add_time = #{adminUser.addTime}
+            </if>
+            <if test="adminUser.updateUser != null">
+                and update_user = #{adminUser.updateUser}
+            </if>
+            <if test="adminUser.updateTime != null">
+                and update_time = #{adminUser.updateTime}
+            </if>
+            <if test="adminUser.freezeCause != null">
+                and freeze_cause = #{adminUser.freezeCause}
+            </if>
+            <if test="adminUser.freezeDate != null">
+                and freeze_date = #{adminUser.freezeDate}
+            </if>
+            <if test="adminUser.delFlag != null">
+                and del_flag = #{adminUser.delFlag}
+            </if>
+            <if test="adminUser.loginFlag != null">
+                and login_flag = #{adminUser.loginFlag}
+            </if>
+            <if test="adminUser.loginIp != null">
+                and login_ip = #{adminUser.loginIp}
+            </if>
+            <if test="adminUser.loginDate != null">
+                and login_date = #{adminUser.loginDate}
+            </if>
+            <if test="adminUser.remarks != null">
+                and remarks = #{adminUser.remarks}
+            </if>
+        </if>
+    </select>
 
-	<!-- 数量查询 -->
-	<select id="getCountByCondition" resultType="java.lang.Integer">
-		 SELECT
-		 count(id) 
-		 FROM admin_user where del_flag = 0 
-		 <if test=" adminUser != null">
-			<if test="adminUser.id != null">
-			   and id = #{adminUser.id}
-			</if>
-			<if test="adminUser.loginName != null">
-			   and login_name = #{adminUser.loginName}
-			</if>
-			<if test="adminUser.loginImg != null">
-			   and login_img = #{adminUser.loginImg}
-			</if>
-			<if test="adminUser.realName != null">
-			   and real_name = #{adminUser.realName}
-			</if>
-			<if test="adminUser.password != null">
-			   and password = #{adminUser.password}
-			</if>
-			<if test="adminUser.email != null">
-			   and email = #{adminUser.email}
-			</if>
-			<if test="adminUser.sex != null">
-			   and sex = #{adminUser.sex}
-			</if>
-			<if test="adminUser.mobile != null">
-			   and mobile = #{adminUser.mobile}
-			</if>
-			<if test="adminUser.sign != null">
-			   and sign = #{adminUser.sign}
-			</if>
-			<if test="adminUser.age != null">
-			   and age = #{adminUser.age}
-			</if>
-			<if test="adminUser.addUser != null">
-			   and add_user = #{adminUser.addUser}
-			</if>
-			<if test="adminUser.addTime != null">
-			   and add_time = #{adminUser.addTime}
-			</if>
-			<if test="adminUser.updateUser != null">
-			   and update_user = #{adminUser.updateUser}
-			</if>
-			<if test="adminUser.updateTime != null">
-			   and update_time = #{adminUser.updateTime}
-			</if>
-			<if test="adminUser.freezeCause != null">
-			   and freeze_cause = #{adminUser.freezeCause}
-			</if>
-			<if test="adminUser.freezeDate != null">
-			   and freeze_date = #{adminUser.freezeDate}
-			</if>
-			<if test="adminUser.delFlag != null">
-			   and del_flag = #{adminUser.delFlag}
-			</if>
-			<if test="adminUser.loginFlag != null">
-			   and login_flag = #{adminUser.loginFlag}
-			</if>
-			<if test="adminUser.loginIp != null">
-			   and login_ip = #{adminUser.loginIp}
-			</if>
-			<if test="adminUser.loginDate != null">
-			   and login_date = #{adminUser.loginDate}
-			</if>
-			<if test="adminUser.remarks != null">
-			   and remarks = #{adminUser.remarks}
-			</if>
-		 </if>
-	</select>
+    <!-- 数量查询 -->
+    <select id="getCountByCondition" resultType="java.lang.Integer">
+        SELECT
+        count(id)
+        FROM admin_user where del_flag = 0
+        <if test=" adminUser != null">
+            <if test="adminUser.id != null">
+                and id = #{adminUser.id}
+            </if>
+            <if test="adminUser.loginName != null">
+                and login_name = #{adminUser.loginName}
+            </if>
+            <if test="adminUser.loginImg != null">
+                and login_img = #{adminUser.loginImg}
+            </if>
+            <if test="adminUser.realName != null">
+                and real_name = #{adminUser.realName}
+            </if>
+            <if test="adminUser.password != null">
+                and password = #{adminUser.password}
+            </if>
+            <if test="adminUser.email != null">
+                and email = #{adminUser.email}
+            </if>
+            <if test="adminUser.sex != null">
+                and sex = #{adminUser.sex}
+            </if>
+            <if test="adminUser.mobile != null">
+                and mobile = #{adminUser.mobile}
+            </if>
+            <if test="adminUser.sign != null">
+                and sign = #{adminUser.sign}
+            </if>
+            <if test="adminUser.age != null">
+                and age = #{adminUser.age}
+            </if>
+            <if test="adminUser.addUser != null">
+                and add_user = #{adminUser.addUser}
+            </if>
+            <if test="adminUser.addTime != null">
+                and add_time = #{adminUser.addTime}
+            </if>
+            <if test="adminUser.updateUser != null">
+                and update_user = #{adminUser.updateUser}
+            </if>
+            <if test="adminUser.updateTime != null">
+                and update_time = #{adminUser.updateTime}
+            </if>
+            <if test="adminUser.freezeCause != null">
+                and freeze_cause = #{adminUser.freezeCause}
+            </if>
+            <if test="adminUser.freezeDate != null">
+                and freeze_date = #{adminUser.freezeDate}
+            </if>
+            <if test="adminUser.delFlag != null">
+                and del_flag = #{adminUser.delFlag}
+            </if>
+            <if test="adminUser.loginFlag != null">
+                and login_flag = #{adminUser.loginFlag}
+            </if>
+            <if test="adminUser.loginIp != null">
+                and login_ip = #{adminUser.loginIp}
+            </if>
+            <if test="adminUser.loginDate != null">
+                and login_date = #{adminUser.loginDate}
+            </if>
+            <if test="adminUser.remarks != null">
+                and remarks = #{adminUser.remarks}
+            </if>
+        </if>
+    </select>
 
-	<!-- 添加 -->
-	<insert id="insert" parameterType="com.java.ting.domain.AdminUser">
-		 INSERT INTO admin_user
- 		(id,login_name,login_img,real_name,password,email,sex,mobile,sign,age,add_user,add_time,update_user,update_time,freeze_cause,freeze_date,del_flag,login_flag,login_ip,login_date,remarks)
-		 VALUES 
- 		(#{id},#{loginName},#{loginImg},#{realName},#{password},#{email},#{sex},#{mobile},#{sign},#{age},#{addUser},now(),#{updateUser},#{updateTime},#{freezeCause},#{freezeDate},#{delFlag},#{loginFlag},#{loginIp},#{loginDate},#{remarks})
-	</insert>
+    <!-- 添加 -->
+    <insert id="insert" parameterType="com.java.ting.domain.AdminUser">
+        INSERT INTO admin_user
+        (id, login_name, login_img, real_name, password, email, sex, mobile, sign, age, add_user, add_time, update_user,
+         update_time, freeze_cause, freeze_date, del_flag, login_flag, login_ip, login_date, remarks)
+        VALUES (#{id}, #{loginName}, #{loginImg}, #{realName}, #{password}, #{email}, #{sex}, #{mobile}, #{sign},
+                #{age}, #{addUser}, now(), #{updateUser}, #{updateTime}, #{freezeCause}, #{freezeDate}, #{delFlag},
+                #{loginFlag}, #{loginIp}, #{loginDate}, #{remarks})
+    </insert>
 
-	<!-- 添加 （匹配有值的字段）-->
-	<insert id="insertSelective" parameterType="com.java.ting.domain.AdminUser">
-		 INSERT INTO admin_user
-		 <trim prefix="(" suffix=")" suffixOverrides="," >
-			<if test="id != null">
-				 id,
-			</if>
-			<if test="loginName != null">
-				 login_name,
-			</if>
-			<if test="loginImg != null">
-				 login_img,
-			</if>
-			<if test="realName != null">
-				 real_name,
-			</if>
-			<if test="password != null">
-				 password,
-			</if>
-			<if test="email != null">
-				 email,
-			</if>
-			<if test="sex != null">
-				 sex,
-			</if>
-			<if test="mobile != null">
-				 mobile,
-			</if>
-			<if test="sign != null">
-				 sign,
-			</if>
-			<if test="age != null">
-				 age,
-			</if>
-			<if test="addUser != null">
-				 add_user,
-			</if>
-				 add_time,
-			<if test="updateUser != null">
-				 update_user,
-			</if>
-			<if test="updateTime != null">
-				 update_time,
-			</if>
-			<if test="freezeCause != null">
-				 freeze_cause,
-			</if>
-			<if test="freezeDate != null">
-				 freeze_date,
-			</if>
-			<if test="delFlag != null">
-				del_flag,
-			</if>
-			<if test="loginFlag != null">
-				 login_flag,
-			</if>
-			<if test="loginIp != null">
-				 login_ip,
-			</if>
-			<if test="loginDate != null">
-				 login_date,
-			</if>
-			<if test="remarks != null">
-				 remarks,
-			</if>
+    <!-- 添加 （匹配有值的字段）-->
+    <insert id="insertSelective" parameterType="com.java.ting.domain.AdminUser">
+        INSERT INTO admin_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="loginName != null">
+                login_name,
+            </if>
+            <if test="loginImg != null">
+                login_img,
+            </if>
+            <if test="realName != null">
+                real_name,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="sign != null">
+                sign,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="addUser != null">
+                add_user,
+            </if>
+            add_time,
+            <if test="updateUser != null">
+                update_user,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="freezeCause != null">
+                freeze_cause,
+            </if>
+            <if test="freezeDate != null">
+                freeze_date,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+            <if test="loginFlag != null">
+                login_flag,
+            </if>
+            <if test="loginIp != null">
+                login_ip,
+            </if>
+            <if test="loginDate != null">
+                login_date,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
 
-		 </trim>
-		 <trim prefix="values (" suffix=")" suffixOverrides="," >
-			<if test="id!=null">
-				 #{id},
-			</if>
-			<if test="loginName!=null">
-				 #{loginName},
-			</if>
-			<if test="loginImg!=null">
-				 #{loginImg},
-			</if>
-			<if test="realName!=null">
-				 #{realName},
-			</if>
-			<if test="password!=null">
-				 #{password},
-			</if>
-			<if test="email!=null">
-				 #{email},
-			</if>
-			<if test="sex!=null">
-				 #{sex},
-			</if>
-			<if test="mobile!=null">
-				 #{mobile},
-			</if>
-			<if test="sign!=null">
-				 #{sign},
-			</if>
-			<if test="age!=null">
-				 #{age},
-			</if>
-			<if test="addUser!=null">
-				 #{addUser},
-			</if>
-				 now(),
-			<if test="updateUser!=null">
-				 #{updateUser},
-			</if>
-			<if test="updateTime!=null">
-				 #{updateTime},
-			</if>
-			<if test="freezeCause!=null">
-				 #{freezeCause},
-			</if>
-			<if test="freezeDate!=null">
-				 #{freezeDate},
-			</if>
-			<if test="delFlag!=null">
-				 #{delFlag},
-			</if>
-			<if test="loginFlag!=null">
-				 #{loginFlag},
-			</if>
-			<if test="loginIp!=null">
-				 #{loginIp},
-			</if>
-			<if test="loginDate!=null">
-				 #{loginDate},
-			</if>
-			<if test="remarks!=null">
-				 #{remarks},
-			</if>
-		 </trim>
-	</insert>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id!=null">
+                #{id},
+            </if>
+            <if test="loginName!=null">
+                #{loginName},
+            </if>
+            <if test="loginImg!=null">
+                #{loginImg},
+            </if>
+            <if test="realName!=null">
+                #{realName},
+            </if>
+            <if test="password!=null">
+                #{password},
+            </if>
+            <if test="email!=null">
+                #{email},
+            </if>
+            <if test="sex!=null">
+                #{sex},
+            </if>
+            <if test="mobile!=null">
+                #{mobile},
+            </if>
+            <if test="sign!=null">
+                #{sign},
+            </if>
+            <if test="age!=null">
+                #{age},
+            </if>
+            <if test="addUser!=null">
+                #{addUser},
+            </if>
+            now(),
+            <if test="updateUser!=null">
+                #{updateUser},
+            </if>
+            <if test="updateTime!=null">
+                #{updateTime},
+            </if>
+            <if test="freezeCause!=null">
+                #{freezeCause},
+            </if>
+            <if test="freezeDate!=null">
+                #{freezeDate},
+            </if>
+            <if test="delFlag!=null">
+                #{delFlag},
+            </if>
+            <if test="loginFlag!=null">
+                #{loginFlag},
+            </if>
+            <if test="loginIp!=null">
+                #{loginIp},
+            </if>
+            <if test="loginDate!=null">
+                #{loginDate},
+            </if>
+            <if test="remarks!=null">
+                #{remarks},
+            </if>
+        </trim>
+    </insert>
 
-	<!-- 修 改-->
-	<update id="updateByPrimaryKeySelective" parameterType="com.java.ting.domain.AdminUser">
-		 UPDATE admin_user
- 		 <set> 
-			<if test="loginName != null">
-				 login_name = #{loginName},
-			</if>
-			<if test="loginImg != null">
-				 login_img = #{loginImg},
-			</if>
-			<if test="realName != null">
-				 real_name = #{realName},
-			</if>
-			<if test="password != null">
-				 password = #{password},
-			</if>
-			<if test="email != null">
-				 email = #{email},
-			</if>
-			<if test="sex != null">
-				 sex = #{sex},
-			</if>
-			<if test="mobile != null">
-				 mobile = #{mobile},
-			</if>
-			<if test="sign != null">
-				 sign = #{sign},
-			</if>
-			<if test="age != null">
-				 age = #{age},
-			</if>
-			<if test="addUser != null">
-				 add_user = #{addUser},
-			</if>
-			<if test="addTime != null">
-				 add_time = #{addTime},
-			</if>
-			<if test="updateUser != null">
-				 update_user = #{updateUser},
-			</if>
-			<if test="updateTime != null">
-				 update_time = #{updateTime},
-			</if>
-			<if test="freezeCause != null">
-				 freeze_cause = #{freezeCause},
-			</if>
-			<if test="freezeDate != null">
-				 freeze_date = #{freezeDate},
-			</if>
-			<if test="delFlag != null">
-				del_flag = #{delFlag},
-			</if>
-			<if test="loginFlag != null">
-				 login_flag = #{loginFlag},
-			</if>
-			<if test="loginIp != null">
-				 login_ip = #{loginIp},
-			</if>
-			<if test="loginDate != null">
-				 login_date = #{loginDate},
-			</if>
-			<if test="remarks != null">
-				 remarks = #{remarks},
-			</if>
+    <!-- 修 改-->
+    <update id="updateByPrimaryKeySelective" parameterType="com.java.ting.domain.AdminUser">
+        UPDATE admin_user
+        <set>
+            <if test="loginName != null">
+                login_name = #{loginName},
+            </if>
+            <if test="loginImg != null">
+                login_img = #{loginImg},
+            </if>
+            <if test="realName != null">
+                real_name = #{realName},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile},
+            </if>
+            <if test="sign != null">
+                sign = #{sign},
+            </if>
+            <if test="age != null">
+                age = #{age},
+            </if>
+            <if test="addUser != null">
+                add_user = #{addUser},
+            </if>
+            <if test="addTime != null">
+                add_time = #{addTime},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="freezeCause != null">
+                freeze_cause = #{freezeCause},
+            </if>
+            <if test="freezeDate != null">
+                freeze_date = #{freezeDate},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag},
+            </if>
+            <if test="loginFlag != null">
+                login_flag = #{loginFlag},
+            </if>
+            <if test="loginIp != null">
+                login_ip = #{loginIp},
+            </if>
+            <if test="loginDate != null">
+                login_date = #{loginDate},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks},
+            </if>
 
- 		 </set>
-		 WHERE id = #{id}
-	</update>
+        </set>
+        WHERE id = #{id}
+    </update>
 
 </mapper>

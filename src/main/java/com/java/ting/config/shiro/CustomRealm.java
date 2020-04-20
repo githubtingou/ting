@@ -1,5 +1,6 @@
 package com.java.ting.config.shiro;
 
+import com.alibaba.fastjson.JSON;
 import com.java.ting.domain.AdminUser;
 import com.java.ting.domain.SysRole;
 import com.java.ting.mapper.AdminUserMapper;
@@ -65,12 +66,14 @@ public class CustomRealm extends AuthorizingRealm {
      * 获取授权信息
      *
      * @param principalCollection
-     * @return
+     * @return 登录用户的权限信息
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         log.info("权限认证");
         String username = (String) SecurityUtils.getSubject().getPrincipal();
+        Set<String> realmNames = principalCollection.getRealmNames();
+        log.info("realmNames,{}", JSON.toJSON(realmNames));
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         //获得该用户角色
         List<SysRole> role = roleMapper.getRoleByName(username);

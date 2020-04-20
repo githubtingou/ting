@@ -1,8 +1,5 @@
 package com.java.ting.common;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * 响应码
  *
@@ -16,7 +13,7 @@ public enum ResponseCode {
     /**
      * 失败
      */
-    ERROE_CODE(5000, "请求失败", false),
+    ERROE_CODE(5000, "请求失败"),
     /**
      * 文件上传失败
      */
@@ -24,7 +21,7 @@ public enum ResponseCode {
     /**
      * 文件不能为空
      */
-    ERROR_FILE_NULL(5002, "文件不能为空", false),
+    ERROR_FILE_NULL(5002, "文件不能为空"),
     /**
      * 数据插入失败
      */
@@ -32,28 +29,28 @@ public enum ResponseCode {
     /**
      * 权限错误
      */
-    SHIRO_ERROR_CODE(5100, "权限错误", false),
+    SHIRO_ERROR_CODE(5100, "权限错误"),
     /**
      * token错误
      */
-    SHIRO_ERROR_TOKEN(5101, "token错误", false),
+    SHIRO_ERROR_TOKEN(5101, "token错误"),
     /**
      * 用户无权限
      */
-    SHIRO_ERROR_NOSHIRO(5102, "用户无权限", false),
+    SHIRO_ERROR_NOSHIRO(5102, "用户无权限"),
     /**
      * 用户名或密码不能为空
      */
-    SHIRO_ERROR_EMPTY_NAME_OR_PASSWORD(5103, "用户名或密码不能为空", false),
+    SHIRO_ERROR_EMPTY_NAME_OR_PASSWORD(5103, "用户名或密码不能为空"),
     /**
      * 无该用户信息
      */
-    SHIRO_ERROR_NO_USER(5103, "系统中暂无该用户信息", false),
+    SHIRO_ERROR_NO_USER(5103, "系统中暂无该用户信息"),
 
     /**
      * 其他权限错误
      */
-    SHIRO_ERROR_OTHER(5199, "权限错误", false);
+    SHIRO_ERROR_OTHER(5199, "权限错误");
 
     /**
      * 编号

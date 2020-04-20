@@ -46,7 +46,8 @@ public class ExceptionHandle {
 
         // valid 异常处理
         if (e instanceof MethodArgumentNotValidException) {
-            return ResponseUtils.buildResponseDtoError(ResponseCode.ERROE_CODE, validException(e));
+            return ResponseUtils.buildResponseDtoError(ResponseCode.ERROE_CODE,
+                    validException((MethodArgumentNotValidException) e));
 
         }
         log.error("错误信息，", e);
@@ -58,22 +59,38 @@ public class ExceptionHandle {
      * valid 异常处理
      * MethodArgumentNotValidException
      *
-     * @param e 异常
+     * @param e MethodArgumentNotValidException异常
      * @return valid错误信息
      */
-    private String validException(Exception e) {
-        BindingResult bindingResult = ((MethodArgumentNotValidException) e).getBindingResult();
+    private String validException(MethodArgumentNotValidException e) {
+        BindingResult bindingResult = e.getBindingResult();
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         StringBuilder sb = new StringBuilder();
-        for (FieldError fieldError : fieldErrors) {
+//        for (FieldError fieldError : fieldErrors) {
+//            /* 获取valid定义的message */
+//            // 字段value
+//            Object rejectedValue = fieldError.getRejectedValue();
+//            // 字段key
+//            String field = fieldError.getField();
+//            // message
+//            String defaultMessage = fieldError.getDefaultMessage();
+//            sb.append(defaultMessage).append(";");
+//        }
+        for (int i = 0; i < fieldErrors.size(); i++) {
+
             /* 获取valid定义的message */
             // 字段value
-            Object rejectedValue = fieldError.getRejectedValue();
+            Object rejectedValue = fieldErrors.get(i).getRejectedValue();
             // 字段key
-            String field = fieldError.getField();
+            String field = fieldErrors.get(i).getField();
             // message
-            String defaultMessage = fieldError.getDefaultMessage();
-            sb.append(defaultMessage).append(";");
+            String defaultMessage = fieldErrors.get(i).getDefaultMessage();
+            if (i != fieldErrors.size() - 1) {
+                /* 获取valid定义的message */
+                // 字段value
+                sb.append(defaultMessage).append(";");
+
+            }
         }
         return sb.toString();
 
