@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * 自定义身份认证
+ * 自定义身份认证测试
  *
  * @author tingOu
  */
