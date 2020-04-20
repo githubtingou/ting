@@ -1,137 +1,144 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.java.ting.mapper.SysRoleMenuMapper">
 
-	<!--实体映射-->
-	<resultMap id="BaseResultMap" type="com.java.ting.domain.SysRoleMenu">
-		<id property="sysRoleId" column="sys_role_id" />
-		<result property="adminMenuId" column="admin_menu_id" />
-	</resultMap>
+    <!--实体映射-->
+    <resultMap id="BaseResultMap" type="com.java.ting.domain.SysRoleMenu">
+        <id property="sysRoleId" column="sys_role_id"/>
+        <result property="adminMenuId" column="admin_menu_id"/>
+    </resultMap>
 
 
-	<!-- 通用查询结果列-->
-	<sql id="Base_Column_List">
-		 id,	admin_menu_id
-	</sql>
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
+        sys_role_id,	admin_menu_id
+    </sql>
 
-	<!-- 查询（根据主键ID查询） -->
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-		 SELECT
-		 <include refid="Base_Column_List" />
-		 FROM sys_role_menu
-		 WHERE sys_role_id = #{sysRoleId}
-	</select>
+    <!-- 查询（根据主键ID查询） -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_role_menu
+        WHERE sys_role_id = #{id}
+    </select>
 
-	<!-- 分页查询 -->
-	<select id="getByPage" resultMap="BaseResultMap" resultType="com.java.ting.domain.SysRoleMenu">
-		 SELECT
-		 <include refid="Base_Column_List" />
-		 FROM sys_role_menu where del_flag =0 
-		 <if test=" sysRoleMenu != null">
-			<if test="sysRoleMenu.sysRoleId != null">
-			   and sys_role_id = #{sysRoleMenu.sysRoleId}
-			</if>
-			<if test="sysRoleMenu.adminMenuId != null">
-			   and admin_menu_id = #{sysRoleMenu.adminMenuId}
-			</if>
-		 </if>
-		 <if test="orderColumn != null">
-			 order by ${orderColumn} 
-		 </if>
-		 <if test="orderType != null">
-			 ${orderType} 
-		 </if>
-		 <if test="start != null and limit != null">
-			 limit #{start}, #{limit}
-		 </if>
-	</select>
+    <!-- 分页查询 -->
+    <select id="getByPage" resultMap="BaseResultMap" resultType="com.java.ting.domain.SysRoleMenu">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_role_menu
+        <where>
+            <if test=" sysRoleMenu != null">
+                <if test="sysRoleMenu.sysRoleId != null">
+                    and sys_role_id = #{sysRoleMenu.sysRoleId}
+                </if>
+                <if test="sysRoleMenu.adminMenuId != null">
+                    and admin_menu_id = #{sysRoleMenu.adminMenuId}
+                </if>
+            </if>
+            <if test="orderColumn != null">
+                order by #{orderColumn}
+            </if>
+            <if test="orderType != null">
+                #{orderType}
+            </if>
+            <if test="start != null and limit != null">
+                limit #{start}, #{limit}
+            </if>
+        </where>
+    </select>
 
-	<!-- 简单查询 -->
-	<select id="getListByCondition" resultMap="BaseResultMap" resultType="com.java.ting.domain.SysRoleMenu">
-		 SELECT
-		 <include refid="Base_Column_List" />
-		 FROM sys_role_menu where del_flag = 0 
-		 <if test=" sysRoleMenu != null">
-			<if test="sysRoleMenu.sysRoleId != null">
-			   and sys_role_id = #{sysRoleMenu.sysRoleId}
-			</if>
-			<if test="sysRoleMenu.adminMenuId != null">
-			   and admin_menu_id = #{sysRoleMenu.adminMenuId}
-			</if>
-		 </if>
-	</select>
+    <!-- 简单查询 -->
+    <select id="getListByCondition" resultMap="BaseResultMap" resultType="com.java.ting.domain.SysRoleMenu">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_role_menu
+        <where>
+            <if test=" sysRoleMenu != null">
+                <if test="sysRoleMenu.sysRoleId != null">
+                    and sys_role_id = #{sysRoleMenu.sysRoleId}
+                </if>
+                <if test="sysRoleMenu.adminMenuId != null">
+                    and admin_menu_id = #{sysRoleMenu.adminMenuId}
+                </if>
+            </if>
+        </where>
+    </select>
 
-	<!-- 单条查询 -->
-	<select id="getOneByCondition" resultMap="BaseResultMap" resultType="com.java.ting.domain.SysRoleMenu">
-		 SELECT
-		 <include refid="Base_Column_List" />
-		 FROM sys_role_menu where del_flag = 0 
-		 <if test=" sysRoleMenu != null">
-			<if test="sysRoleMenu.sysRoleId != null">
-			   and sys_role_id = #{sysRoleMenu.sysRoleId}
-			</if>
-			<if test="sysRoleMenu.adminMenuId != null">
-			   and admin_menu_id = #{sysRoleMenu.adminMenuId}
-			</if>
-		 </if>
-	</select>
+    <!-- 单条查询 -->
+    <select id="getOneByCondition" resultMap="BaseResultMap" resultType="com.java.ting.domain.SysRoleMenu">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_role_menu
+        <where>
+            <if test=" sysRoleMenu != null">
+                <if test="sysRoleMenu.sysRoleId != null">
+                    and sys_role_id = #{sysRoleMenu.sysRoleId}
+                </if>
+                <if test="sysRoleMenu.adminMenuId != null">
+                    and admin_menu_id = #{sysRoleMenu.adminMenuId}
+                </if>
+            </if>
+        </where>
+    </select>
 
-	<!-- 数量查询 -->
-	<select id="getCountByCondition" resultType="java.lang.Integer">
-		 SELECT
-		 count(id) 
-		 FROM sys_role_menu where del_flag = 0 
-		 <if test=" sysRoleMenu != null">
-			<if test="sysRoleMenu.sysRoleId != null">
-			   and sys_role_id = #{sysRoleMenu.sysRoleId}
-			</if>
-			<if test="sysRoleMenu.adminMenuId != null">
-			   and admin_menu_id = #{sysRoleMenu.adminMenuId}
-			</if>
-		 </if>
-	</select>
+    <!-- 数量查询 -->
+    <select id="getCountByCondition" resultType="java.lang.Integer">
+        SELECT
+        count(*)
+        FROM sys_role_menu
+        <where>
+            <if test=" sysRoleMenu != null">
+                <if test="sysRoleMenu.sysRoleId != null">
+                    and sys_role_id = #{sysRoleMenu.sysRoleId}
+                </if>
+                <if test="sysRoleMenu.adminMenuId != null">
+                    and admin_menu_id = #{sysRoleMenu.adminMenuId}
+                </if>
+            </if>
+        </where>
+    </select>
 
-	<!-- 添加 -->
-	<insert id="insert" parameterType="com.java.ting.domain.SysRoleMenu">
-		 INSERT INTO sys_role_menu
- 		(sys_role_id,admin_menu_id) 
-		 VALUES 
- 		(#{sysRoleId},#{adminMenuId}) 
-	</insert>
+    <!-- 添加 -->
+    <insert id="insert" parameterType="com.java.ting.domain.SysRoleMenu">
+        INSERT INTO sys_role_menu
+            (sys_role_id, admin_menu_id)
+        VALUES (#{sysRoleId}, #{adminMenuId})
+    </insert>
 
-	<!-- 添加 （匹配有值的字段）-->
-	<insert id="insertSelective" parameterType="com.java.ting.domain.SysRoleMenu">
-		 INSERT INTO sys_role_menu
-		 <trim prefix="(" suffix=")" suffixOverrides="," >
-			<if test="sysRoleId != null">
-				 sys_role_id,
-			</if>
-			<if test="adminMenuId != null">
-				 admin_menu_id,
-			</if>
+    <!-- 添加 （匹配有值的字段）-->
+    <insert id="insertSelective" parameterType="com.java.ting.domain.SysRoleMenu">
+        INSERT INTO sys_role_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysRoleId != null">
+                sys_role_id,
+            </if>
+            <if test="adminMenuId != null">
+                admin_menu_id,
+            </if>
 
-		 </trim>
-		 <trim prefix="values (" suffix=")" suffixOverrides="," >
-			<if test="sysRoleId!=null">
-				 #{sysRoleId},
-			</if>
-			<if test="adminMenuId!=null">
-				 #{adminMenuId},
-			</if>
-		 </trim>
-	</insert>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sysRoleId!=null">
+                #{sysRoleId},
+            </if>
+            <if test="adminMenuId!=null">
+                #{adminMenuId},
+            </if>
+        </trim>
+    </insert>
 
-	<!-- 修 改-->
-	<update id="updateByPrimaryKeySelective" parameterType="com.java.ting.domain.SysRoleMenu">
-		 UPDATE sys_role_menu
- 		 <set> 
-			<if test="adminMenuId != null">
-				 admin_menu_id = #{adminMenuId},
-			</if>
+    <!-- 修 改-->
+    <update id="updateByPrimaryKeySelective" parameterType="com.java.ting.domain.SysRoleMenu">
+        UPDATE sys_role_menu
+        <set>
+            <if test="adminMenuId != null">
+                admin_menu_id = #{adminMenuId},
+            </if>
 
- 		 </set>
-		 WHERE sys_role_id = #{sysRoleId}
-	</update>
+        </set>
+        WHERE sys_role_id = #{sysRoleId}
+    </update>
 
 </mapper>

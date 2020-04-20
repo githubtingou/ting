@@ -26,8 +26,8 @@ public class ShiroConfig {
     /**
      * 设置对应的过滤条件和跳转条件
      *
-     * @param securityManager
-     * @return
+     * @param securityManager 安全管理
+     * @return shiroFilterFactoryBean 拦截工厂
      */
     @Bean
     public ShiroFilterFactoryBean shirFilter(@Qualifier("securityManager") SecurityManager securityManager) {
@@ -70,13 +70,6 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/dev/**", "anon");
         filterChainDefinitionMap.put("/favicon.ico**", "anon");
-        filterChainDefinitionMap.put("/css/**", "anon");
-        filterChainDefinitionMap.put("/docs/**", "anon");
-        filterChainDefinitionMap.put("/fonts/**", "anon");
-        filterChainDefinitionMap.put("/img/**", "anon");
-        filterChainDefinitionMap.put("/js/**", "anon");
-        filterChainDefinitionMap.put("/dev/**.json", "anon");
-
         //其余接口一律拦截
         //主要这行代码必须放在所有权限设置的最后，不然会导致所有 url 都被拦截
         filterChainDefinitionMap.put("/**", "authc");
@@ -95,6 +88,7 @@ public class ShiroConfig {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         // 设置realm.
         securityManager.setRealm(customRealm);
+//        securityManager.setRememberMeManager((RememberMeManager) cookie());
         return securityManager;
     }
 
@@ -106,6 +100,8 @@ public class ShiroConfig {
      */
     @Bean(name = "customRealm")
     public CustomRealm customRealm() {
+        CustomRealm customRealm = new CustomRealm();
+        customRealm.setCredentialsMatcher(hashedCredentialsMatcher());
         return new CustomRealm();
     }
 
@@ -135,7 +131,7 @@ public class ShiroConfig {
         //散列算法:这里使用MD5算法;
         hashedCredentialsMatcher.setHashAlgorithmName("md5");
         //散列的次数，比如散列两次，相当于 md5(md5(""));
-        hashedCredentialsMatcher.setHashIterations(2);
+        hashedCredentialsMatcher.setHashIterations(1024);
         return hashedCredentialsMatcher;
     }
 

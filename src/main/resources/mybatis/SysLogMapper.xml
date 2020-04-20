@@ -73,10 +73,10 @@
 			</if>
 		 </if>
 		 <if test="orderColumn != null">
-			 order by ${orderColumn} 
+			 order by #{orderColumn}
 		 </if>
 		 <if test="orderType != null">
-			 ${orderType} 
+			 #{orderType}
 		 </if>
 		 <if test="start != null and limit != null">
 			 limit #{start}, #{limit}

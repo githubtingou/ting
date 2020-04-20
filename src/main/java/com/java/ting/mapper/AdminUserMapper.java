@@ -1,9 +1,9 @@
 package com.java.ting.mapper;
 
-import java.util.List;
-
 import com.java.ting.domain.AdminUser;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * AdminUserMapper数据库操作接口类

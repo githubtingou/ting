@@ -19,7 +19,7 @@ public class RabbitReturnCallBackListener implements RabbitTemplate.ReturnCallba
     @Override
     public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
         log.info("rabbit失败后return回调,message-{},replyCode-{},replyText-{},exchange-{},routingKey-{}",
-                JSON.toJSONString(message.getBody()), replyCode, replyText, exchange);
+                JSON.toJSONString(message.getBody()), replyCode, replyText, exchange,routingKey);
     }
 
 }

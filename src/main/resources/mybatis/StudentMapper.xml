@@ -9,7 +9,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-    id, student_name, teacher_id
+        id, student_name, teacher_id
     </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -20,8 +20,9 @@
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from student
-    where id = #{id,jdbcType=INTEGER}
+        delete
+        from student
+        where id = #{id,jdbcType=INTEGER}
     </delete>
 
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.java.ting.domain.Student"
@@ -67,7 +68,7 @@
     <update id="updateByPrimaryKey" parameterType="com.java.ting.domain.Student">
         update student
         set student_name = #{studentName,jdbcType=VARCHAR},
-        teacher_id = #{teacherId,jdbcType=INTEGER}
+            teacher_id   = #{teacherId,jdbcType=INTEGER}
         where id = #{id,jdbcType=INTEGER}
     </update>
 

@@ -31,3 +31,4 @@ mvnw.cmd
 
 ### VS Code ###
 .vscode/
+src/main/java/com/java/ting/util/Test.java
